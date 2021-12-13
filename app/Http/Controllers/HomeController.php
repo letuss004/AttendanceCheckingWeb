@@ -25,7 +25,10 @@ class HomeController extends Controller
      */
     public function index(): Renderable
     {
-        $user = User::find(auth()->user()->getAuthIdentifier());
+        $user = (new User)->find(auth()->user()->getAuthIdentifier());
+        if ($user->userType->id = 1) {
+//            return view('home/');
+        }
         return view('home');
     }
 }

@@ -21,18 +21,24 @@ use Laravel\Sanctum\PersonalAccessToken;
  * App\Models\User
  *
  * @property int $id
- * @property string $name
  * @property string $email
- * @property Carbon|null $email_verified_at
+ * @property string $username
+ * @property int $user_type
+ * @property string $name
  * @property string $password
+ * @property Carbon|null $email_verified_at
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read \App\Models\Admin|null $admin
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \App\Models\Student|null $student
+ * @property-read \App\Models\Teacher|null $teacher
  * @property-read Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
- * @method static UserFactory factory(...$parameters)
+ * @property-read \App\Models\UserType $userType
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -44,16 +50,9 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
- * @property string $username
- * @method static Builder|User whereUsername($value)
- * @property-read \App\Models\Admin|null $admin
- * @property-read \App\Models\Department|null $department
- * @property-read \App\Models\Student|null $student
- * @property-read \App\Models\Teacher|null $teacher
- * @property-read \App\Models\UserType|null $userType
- * @property int $user_type
  * @method static Builder|User whereUserType($value)
+ * @method static Builder|User whereUsername($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {
