@@ -20,6 +20,12 @@ class CreateDepartmentsTable extends Migration
 
             $table->index('id');
         });
+        $values = [
+            ['department' => 'ICT'],
+            ['department' => 'FST'],
+            ['department' => 'CS'],
+        ];
+        DB::table('departments')->insert($values);
     }
 
     /**

@@ -20,6 +20,12 @@ class CreateUserTypesTable extends Migration
             $table->timestamps();
             $table->index('id');
         });
+        $values = [
+            ['permission' => 'student'],
+            ['permission' => 'teacher'],
+            ['permission' => 'admin'],
+        ];
+        DB::table('user_types')->insert($values);
     }
 
     /**
