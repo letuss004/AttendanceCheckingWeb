@@ -45,14 +45,14 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="user_id"
+                                <label for="id"
                                        class="col-md-4 col-form-label text-md-right">{{ __('User ID') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="user_id"
-                                           class="form-control @error('user_id') is-invalid @enderror" name="user_id"
-                                           value="{{ old('user_id') }}" required autocomplete="user_id">
-                                    @error('user_id')
+                                    <input id="id"
+                                           class="form-control @error('id') is-invalid @enderror" name="id"
+                                           value="{{ old('id') }}" required autocomplete="id">
+                                    @error('id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -61,18 +61,18 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+                                <label for="user_type_id" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="user_type"
-                                            class="form-select form-control @error('user_type') is-invalid @enderror"
-                                            required autocomplete="user_type" name="user_type">
+                                    <select id="user_type_id"
+                                            class="form-select form-control @error('user_type_id') is-invalid @enderror"
+                                            required autocomplete="user_type_id" name="user_type_id">
                                         <option selected>Open this to select</option>
                                         <option value="1">Student</option>
                                         <option value="2">Teacher</option>
                                         <option value="3">Admin</option>
                                     </select>
-                                    @error('user_type')
+                                    @error('user_type_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

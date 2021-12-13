@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $attendance_status_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereAttendanceStatusId($value)
  */
 class Attendance extends Model
 {

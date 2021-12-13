@@ -44,16 +44,16 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param array $data
+     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
+    protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user_id' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
-            'user_type_id' => ['required', 'int', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'id' => ['required', 'string', 'max:255', 'unique:users'],
+            'user_type_id' => ['required', 'int', 'max:255'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -61,23 +61,15 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param array $data
-     * @return User
+     * @param  array  $data
+     * @return \App\Models\User
      */
-    protected function create(array $data): User
+    protected function create(array $data)
     {
-        dd(User::create([
-            'id' => $data['user_id'],
-            'email' => $data['email'],
-            'username' => $data['user_id'] . ' ' . $data['name'],
-            'user_type_id' => $data['user_type_id'],
-            'name' => $data['name'],
-            'password' => Hash::make($data['password']),
-        ]));
         return User::create([
-            'id' => $data['user_id'],
+            'id' => $data['id'],
             'email' => $data['email'],
-            'username' => $data['user_id'] . ' ' . $data['name'],
+            'username' => $data['email'],
             'user_type_id' => $data['user_type_id'],
             'name' => $data['name'],
             'password' => Hash::make($data['password']),

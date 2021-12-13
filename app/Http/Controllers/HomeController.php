@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,18 +19,10 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Renderable
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(): Renderable
+    public function index()
     {
-        $user = auth()->user();
-        if ($user->userType->id == 1) {
-            return view('home/student', $user);
-        } elseif ($user->userType->id == 2) {
-            return view('home/teacher', $user);
-        } elseif ($user->userType->id == 3) {
-            return view('home/admin', $user);
-        }
         return view('home');
     }
 }

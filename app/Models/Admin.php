@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read \App\Models\Course|null $course
  * @property-read \App\Models\Department $department
  * @property-read \App\Models\User $user
+ * @property int $department_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Admin whereDepartmentId($value)
  */
 class Admin extends Model
 {

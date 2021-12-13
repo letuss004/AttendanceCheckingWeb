@@ -17,13 +17,14 @@ use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
+
 /**
  * App\Models\User
  *
  * @property string $id
  * @property string $email
  * @property string $username
- * @property int $user_type
+ * @property int $user_type_id
  * @property string $name
  * @property string $password
  * @property Carbon|null $email_verified_at
@@ -50,7 +51,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
- * @method static Builder|User whereUserType($value)
+ * @method static Builder|User whereUserTypeId($value)
  * @method static Builder|User whereUsername($value)
  * @mixin \Eloquent
  */
@@ -67,7 +68,7 @@ class User extends Authenticatable
         "id",
         'name',
         'username',
-        'user_type',
+        'user_type_id',
         'email',
         'password',
     ];
@@ -90,7 +91,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    protected $primaryKey = 'id';
+    public $incrementing = false;
 
     public function student(): HasOne
     {

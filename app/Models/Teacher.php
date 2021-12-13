@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read \App\Models\Department $department
  * @property-read \App\Models\Lesson|null $lesson
  * @property-read \App\Models\User $user
+ * @property int $department_id
+ * @method static Builder|Teacher whereDepartmentId($value)
  */
 class Teacher extends Model
 {
