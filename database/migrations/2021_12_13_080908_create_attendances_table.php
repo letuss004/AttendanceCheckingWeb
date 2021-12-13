@@ -20,6 +20,7 @@ class CreateAttendancesTable extends Migration
             $table->string('student_id');
             $table->timestamps();
 
+            $table->index('id');
             $table->index('status_id');
             $table->index('lesson_id');
             $table->index('student_id');

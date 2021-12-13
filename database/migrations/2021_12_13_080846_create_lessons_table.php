@@ -20,6 +20,7 @@ class CreateLessonsTable extends Migration
             $table->timestamps();
 
             $table->index('course_id');
+            $table->index('id');
             $table->index('teacher_id');
         });
     }

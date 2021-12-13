@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->timestamps();
 
             $table->index('admin_id');
+            $table->index('id');
 
         });
     }

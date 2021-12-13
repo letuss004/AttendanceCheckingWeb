@@ -17,6 +17,8 @@ class CreateAttendanceStatusesTable extends Migration
             $table->id();
             $table->string('status');
             $table->timestamps();
+
+            $table->index('id');
         });
     }
 

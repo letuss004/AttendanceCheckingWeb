@@ -18,6 +18,7 @@ class CreateUserTypesTable extends Migration
             $table->string('permission')->unique();
 
             $table->timestamps();
+            $table->index('id');
         });
     }
 
