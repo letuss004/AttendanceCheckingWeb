@@ -52,6 +52,8 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read \App\Models\Student|null $student
  * @property-read \App\Models\Teacher|null $teacher
  * @property-read \App\Models\UserType|null $userType
+ * @property int $user_type
+ * @method static Builder|User whereUserType($value)
  */
 class User extends Authenticatable
 {

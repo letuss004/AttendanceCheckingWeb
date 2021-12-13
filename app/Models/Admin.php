@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Admin whereUpdatedAt($value)
+ * @property-read \App\Models\Course|null $course
+ * @property-read \App\Models\Department $department
+ * @property-read \App\Models\User $user
  */
 class Admin extends Model
 {

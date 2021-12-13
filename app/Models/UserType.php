@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|UserType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserType wherePermission($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserType whereUpdatedAt($value)
+ * @property-read \App\Models\User|null $user
  */
 class UserType extends Model
 {

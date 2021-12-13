@@ -28,6 +28,32 @@ class CreateUsersTable extends Migration
             $table->index('user_type');
             $table->primary('id');
         });
+
+        $values = [
+            [
+                'id' => 'ADM001',
+                'email' => 'letuss004@gmail.com',
+                'username' => 'LAT admin',
+                'user_type' => 3,
+                'name' => 'Le Anh Tu',
+                'password' => 'letuss004'],
+            [
+                'id' => 'ICT067',
+                'email' => 'tula.ba9067@st.usth.edu.vn',
+                'username' => 'LAT teacher',
+                'user_type' => 2,
+                'name' => 'Le Anh Tu',
+                'password' => 'letuss004'],
+            [
+                'id' => 'BA9067',
+                'email' => 'tula.ba9067@usth.edu.vn',
+                'username' => 'BA9067 Le Anh Tu',
+                'user_type' => 1,
+                'name' => 'Le Anh Tu',
+                'password' => 'letuss004'
+            ]
+        ];
+        DB::table('users')->insert($values);
     }
 
     /**

@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereDepartment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Department whereUpdatedAt($value)
+ * @property-read \App\Models\Admin|null $admin
+ * @property-read \App\Models\Student|null $student
+ * @property-read \App\Models\Teacher|null $teacher
  */
 class Department extends Model
 {

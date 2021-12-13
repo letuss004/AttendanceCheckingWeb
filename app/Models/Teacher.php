@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereUpdatedAt($value)
+ * @property-read \App\Models\Department $department
+ * @property-read \App\Models\Lesson|null $lesson
+ * @property-read \App\Models\User $user
  */
 class Teacher extends Model
 {

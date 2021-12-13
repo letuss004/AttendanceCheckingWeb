@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Attendance|null $attendance
+ * @property-read \App\Models\Department $department
+ * @property-read \App\Models\User $user
  */
 class Student extends Model
 {
