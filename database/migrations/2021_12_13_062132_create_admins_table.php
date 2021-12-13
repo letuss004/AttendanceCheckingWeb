@@ -16,9 +16,12 @@ class CreateAdminsTable extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->string('id');
             $table->timestamps();
+            $table->integer('department_id');
 
             $table->index('id');
             $table->primary('id');
+
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

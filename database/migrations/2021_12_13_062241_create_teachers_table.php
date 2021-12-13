@@ -15,10 +15,12 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->string('id');
+            $table->integer('department_id');
             $table->timestamps();
 
             $table->index('id');
             $table->primary('id');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
