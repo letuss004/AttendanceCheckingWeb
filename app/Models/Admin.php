@@ -26,11 +26,15 @@ class Admin extends Model
 {
     use HasFactory;
 
-    public function department(): HasOne
+    public function course(): HasOne
     {
-        return $this->hasOne(Department::class);
+        return $this->hasOne(Course::class);
     }
 
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

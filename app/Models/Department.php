@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Models\Department
@@ -26,18 +27,18 @@ class Department extends Model
 {
     use HasFactory;
 
-    public function student(): BelongsTo
+    public function student(): HasOne
     {
-        return $this->belongsTo(Student::class);
+        return $this->hasOne(Student::class);
     }
 
-    public function teacher(): BelongsTo
+    public function teacher(): HasOne
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->hasOne(Teacher::class);
     }
 
-    public function admin(): BelongsTo
+    public function admin(): HasOne
     {
-        return $this->belongsTo(Admin::class);
+        return $this->hasOne(Admin::class);
     }
 }

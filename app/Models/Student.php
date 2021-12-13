@@ -26,9 +26,14 @@ class Student extends Model
 {
     use HasFactory;
 
-    public function department(): HasOne
+    public function attendance(): HasOne
     {
-        return $this->hasOne(Department::class);
+        return $this->hasOne(Attendance::class);
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
     }
 
     public function user(): BelongsTo
