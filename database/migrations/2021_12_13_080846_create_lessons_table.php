@@ -26,9 +26,9 @@ class CreateLessonsTable extends Migration
         $values = [
             ['course_id' => 1,
                 'teacher_id' => 1],
-            ['course_id' => 1,
+            ['course_id' => 2,
                 'teacher_id' => 1],
-            ['course_id' => 1,
+            ['course_id' => 3,
                 'teacher_id' => 1],
         ];
         DB::table('lessons')->insert($values);

@@ -27,14 +27,13 @@ class HomeController extends Controller
     public function index(): Renderable
     {
         $user = (new User)->find(auth()->user()->getAuthIdentifier());
-        dd($user->teacher->course);
-
-        if ($user->user_type_id === 1) {
-            return view('home/student', compact('user'));
-        } elseif ($user->user_type_id === 2) {
-            return view('home/teacher', compact('user'));
-        } elseif ($user->user_type_id === 3) {
-            return view('home/admin', compact('user'));
+        $user_type = $user->user_type_id;
+        if ($user_type === 1) {
+            return view('home/student');
+        } elseif ($user_type === 2) {
+            return view('home/teacher');
+        } elseif ($user_type === 3) {
+            return view('home/admin');
         }
         return view('home/home');
     }

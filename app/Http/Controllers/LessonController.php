@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
+use Illuminate\Http\Response;
 
 class LessonController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Course $course
+     * @return Response
      */
-    public function index()
+    public function index(Course $course): Response
     {
-        //
+        dd($course->lessons, $course->id);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -32,7 +35,7 @@ class LessonController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreLessonRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StoreLessonRequest $request)
     {
@@ -43,7 +46,7 @@ class LessonController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Lesson $lesson)
     {
@@ -54,7 +57,7 @@ class LessonController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Lesson $lesson)
     {
@@ -66,7 +69,7 @@ class LessonController extends Controller
      *
      * @param  \App\Http\Requests\UpdateLessonRequest  $request
      * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
@@ -77,7 +80,7 @@ class LessonController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Lesson $lesson)
     {
