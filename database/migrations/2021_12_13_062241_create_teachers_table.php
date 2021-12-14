@@ -18,7 +18,6 @@ class CreateTeachersTable extends Migration
             $table->string('user_id')->index();
             $table->unsignedBigInteger('department_id');
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
         });
 

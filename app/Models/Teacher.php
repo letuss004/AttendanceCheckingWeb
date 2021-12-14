@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 
 /**
@@ -17,8 +19,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $department_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Course[] $courses
+ * @property-read int|null $courses_count
  * @property-read \App\Models\Department $department
- * @property-read \App\Models\Lesson|null $lesson
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lesson[] $lessons
+ * @property-read int|null $lessons_count
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\TeacherFactory factory(...$parameters)
  * @method static Builder|Teacher newModelQuery()
@@ -35,13 +40,13 @@ class Teacher extends Model
 {
     use HasFactory;
 
-    public function lesson(): HasOne
+    public function lessons(): HasMany
     {
-        return $this->hasOne(Lesson::class);
+        return $this->hasMany(Lesson::class);
     }
-    public function course(): HasOne
+    public function courses(): HasMany
     {
-        return $this->hasOne(Course::class);
+        return $this->hasMany(Course::class);
     }
 
     public function department(): BelongsTo

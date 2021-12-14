@@ -18,6 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 
+
 /**
  * App\Models\User
  *

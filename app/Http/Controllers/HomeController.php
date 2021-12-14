@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index(): Renderable
     {
         $user = (new User)->find(auth()->user()->getAuthIdentifier());
-        dd(Lesson::find($user->teacher), $user->teacher);
+        dd($user->teacher->course);
 
         if ($user->user_type_id === 1) {
             return view('home/student', compact('user'));

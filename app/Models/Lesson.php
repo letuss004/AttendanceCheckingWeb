@@ -7,15 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+
+
 /**
  * App\Models\Lesson
  *
  * @property int $id
  * @property int $course_id
- * @property string $teacher_id
+ * @property int $teacher_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Attendance|null $attendance
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attendance[] $attendances
+ * @property-read int|null $attendances_count
  * @property-read \App\Models\Course $course
  * @property-read \App\Models\Teacher $teacher
  * @method static \Database\Factories\LessonFactory factory(...$parameters)
@@ -33,9 +36,9 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    public function attendance(): HasOne
+    public function attendances()
     {
-        return $this->hasOne(Attendance::class);
+        return $this->hasMany(Attendance::class);
     }
 
     public function teacher(): BelongsTo

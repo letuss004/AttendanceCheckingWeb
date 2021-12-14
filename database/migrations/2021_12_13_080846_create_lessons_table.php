@@ -19,6 +19,7 @@ class CreateLessonsTable extends Migration
             $table->unsignedBigInteger('teacher_id')->index();
             $table->timestamps();
             $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
 
         });
 

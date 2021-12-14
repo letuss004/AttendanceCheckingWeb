@@ -19,7 +19,6 @@ class CreateAdminsTable extends Migration
             $table->unsignedBigInteger('department_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-
         });
     }
 

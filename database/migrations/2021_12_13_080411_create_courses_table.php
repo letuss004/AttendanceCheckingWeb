@@ -20,9 +20,6 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('teacher_id');
             $table->timestamps();
-
-            $table->index('admin_id');
-            $table->index('id');
         });
 
         $values = [

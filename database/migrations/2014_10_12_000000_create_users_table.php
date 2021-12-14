@@ -18,16 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('id')->unique();
             $table->string('email')->unique();
             $table->string('username')->unique();
-            $table->unsignedBigInteger('user_type_id');
+            $table->unsignedBigInteger('user_type_id')->index();
             $table->string('name');
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->index('id');
-            $table->index('user_type_id');
-            $table->primary('id');
         });
 
         $values = [
