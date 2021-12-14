@@ -14,14 +14,19 @@ class CreateTeachersTable extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-            $table->string('id');
-            $table->integer('department_id');
+            $table->id();
+            $table->string('user_id')->index();
+            $table->unsignedBigInteger('department_id');
             $table->timestamps();
 
-            $table->index('id');
-            $table->primary('id');
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
+
+        $values = [
+            ['user_id' => 'ICT067',
+                'department_id' => 1],
+        ];
+        DB::table('teachers')->insert($values);
     }
 
     /**

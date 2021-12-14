@@ -15,14 +15,22 @@ class CreateLessonsTable extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->integer('course_id');
-            $table->string('teacher_id');
+            $table->unsignedBigInteger('course_id')->index();
+            $table->unsignedBigInteger('teacher_id')->index();
             $table->timestamps();
+            $table->foreign('course_id')->references('id')->on('courses');
 
-            $table->index('course_id');
-            $table->index('id');
-            $table->index('teacher_id');
         });
+
+        $values = [
+            ['course_id' => 1,
+                'teacher_id' => 1],
+            ['course_id' => 1,
+                'teacher_id' => 1],
+            ['course_id' => 1,
+                'teacher_id' => 1],
+        ];
+        DB::table('lessons')->insert($values);
     }
 
     /**

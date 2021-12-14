@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Models\Lesson
@@ -32,7 +33,7 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    public function attendance()
+    public function attendance(): HasOne
     {
         return $this->hasOne(Attendance::class);
     }

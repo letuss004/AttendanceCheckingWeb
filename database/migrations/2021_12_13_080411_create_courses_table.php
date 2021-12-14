@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use \Illuminate\Support\Facades\DB;
 
 class CreateCoursesTable extends Migration
 {
@@ -15,14 +16,31 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('admin_id');
+            $table->unsignedBigInteger('course_list_id');
+            $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('teacher_id');
             $table->timestamps();
 
             $table->index('admin_id');
             $table->index('id');
-
         });
+
+        $values = [
+            [
+                'course_list_id' => 1,
+                'teacher_id' => 1,
+                'admin_id' => 1
+            ], [
+                'course_list_id' => 4,
+                'teacher_id' => 1,
+                'admin_id' => 1
+            ], [
+                'course_list_id' => 6,
+                'teacher_id' => 1,
+                'admin_id' => 1
+            ]
+        ];
+        DB::table('courses')->insert($values);
     }
 
     /**
