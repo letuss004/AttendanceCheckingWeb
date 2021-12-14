@@ -15,20 +15,39 @@ class CreateLessonsTable extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->unsignedBigInteger('course_id')->index();
             $table->unsignedBigInteger('teacher_id')->index();
-            $table->timestamps();
+            $table->timestamps(1);
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
         });
 
         $values = [
-            ['course_id' => 1,
+            [
+                'course_id' => 1,
+                'name'=>'Introduction',
                 'teacher_id' => 1],
-            ['course_id' => 2,
+            [
+                'course_id' => 2,
+                'name'=>'Introduction',
                 'teacher_id' => 1],
-            ['course_id' => 3,
+            [
+                'course_id' => 3,
+                'name'=>'Introduction',
+                'teacher_id' => 1],
+            [
+                'course_id' => 1,
+                'name'=>'Second lecture',
+                'teacher_id' => 1],
+            [
+                'course_id' => 2,
+                'name'=>'Second lecture',
+                'teacher_id' => 1],
+            [
+                'course_id' => 3,
+                'name'=>'Second lecture',
                 'teacher_id' => 1],
         ];
         DB::table('lessons')->insert($values);

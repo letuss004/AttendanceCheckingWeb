@@ -72,6 +72,7 @@ class User extends Authenticatable
         'user_type_id',
         'email',
         'password',
+        'created_at'
     ];
 
     /**
@@ -92,8 +93,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected $primaryKey = 'id';
-    public $incrementing = false;
+
+    /*
+     *
+     */
+    public $timestamps = true;
 
     public function student(): HasOne
     {
