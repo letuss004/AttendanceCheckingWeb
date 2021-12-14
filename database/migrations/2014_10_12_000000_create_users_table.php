@@ -40,18 +40,18 @@ class CreateUsersTable extends Migration
                 'password' => Hash::make('letuss004')],
             [
                 'id' => 'ICT067',
-                'email' => 'tula.ba9067@st.usth.edu.vn',
+                'email' => 'tula.ba9067@usth.edu.vn',
                 'username' => 'LAT teacher',
                 'user_type_id' => 2,
                 'name' => 'Le Anh Tu',
-                'password' => Hash::make('letuss004')],
+                'password' => Hash::make('tula.ba9067')],
             [
                 'id' => 'BA9067',
-                'email' => 'tula.ba9067@usth.edu.vn',
+                'email' => 'tula.ba9067@st.usth.edu.vn',
                 'username' => 'BA9067 Le Anh Tu',
                 'user_type_id' => 1,
                 'name' => 'Le Anh Tu',
-                'password' => Hash::make('letuss004')],
+                'password' => Hash::make('tula.ba9067')],
         ];
         DB::table('users')->insert($values);
     }

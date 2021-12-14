@@ -61,8 +61,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="user_type"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+                                <label class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
 
                                 <div class="col-md-6">
                                     <select id="user_type"

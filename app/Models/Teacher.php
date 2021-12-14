@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,16 +12,16 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * App\Models\Teacher
  *
  * @method static \Database\Factories\TeacherFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Teacher newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Teacher newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Teacher query()
+ * @method static Builder|Teacher newModelQuery()
+ * @method static Builder|Teacher newQuery()
+ * @method static Builder|Teacher query()
  * @mixin \Eloquent
  * @property string $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereUpdatedAt($value)
+ * @method static Builder|Teacher whereCreatedAt($value)
+ * @method static Builder|Teacher whereId($value)
+ * @method static Builder|Teacher whereUpdatedAt($value)
  * @property-read \App\Models\Department $department
  * @property-read \App\Models\Lesson|null $lesson
  * @property-read \App\Models\User $user
