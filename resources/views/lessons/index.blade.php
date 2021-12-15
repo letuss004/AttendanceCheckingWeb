@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @php
-    $student = \App\Models\Student::findMany()
+    use App\Models\Student;$student = Course::findMany()
 @endphp
 @section('content')
     <div class="container">

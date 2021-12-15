@@ -46,6 +46,11 @@ class Course extends Model
         return $this->hasMany(Lesson::class);
     }
 
+    public function coursesRegistrations(): HasMany
+    {
+        return $this->hasMany(CoursesRegistration::class);
+    }
+
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class);
@@ -56,10 +61,6 @@ class Course extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function student(): BelongsTo
-    {
-        return $this->belongsTo(Student::class);
-    }
 
     public function courseList(): BelongsTo
     {

@@ -19,7 +19,6 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('course_list_id');
             $table->unsignedBigInteger('admin_id');
             $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('student_id');
             $table->timestamps();
         });
 
@@ -27,17 +26,14 @@ class CreateCoursesTable extends Migration
             [
                 'course_list_id' => 1,
                 'teacher_id' => 1,
-                'student_id' => 1,
                 'admin_id' => 1
             ], [
                 'course_list_id' => 4,
                 'teacher_id' => 1,
-                'student_id' => 1,
                 'admin_id' => 1
             ], [
                 'course_list_id' => 6,
                 'teacher_id' => 1,
-                'student_id' => 1,
                 'admin_id' => 1
             ]
         ];

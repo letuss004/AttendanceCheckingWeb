@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
-
 /**
  * App\Models\Student
  *
@@ -41,10 +40,12 @@ class Student extends Model
     {
         return $this->hasMany(Attendance::class);
     }
-    public function courses(): HasMany
+
+    public function coursesRegistrations(): HasMany
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(CoursesRegistration::class);
     }
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
