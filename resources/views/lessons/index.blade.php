@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+    $student = \App\Models\Student::findMany()
+@endphp
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -9,6 +11,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Attendances</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -20,8 +23,13 @@
                             {{$lesson->name}}
                         </td>
                         <td>
-                            <a class="text-decoration-none link-secondary" href="#">Edit</a>
-                            <a class="text-decoration-none link-secondary" href="#">Delete</a>
+                            {{count($lesson->attendances)}}/number of student
+                        </td>
+                        <td>
+                            <a class="text-decoration-none link-secondary"
+                               href="/lesson/edit/{{$lesson->id}}">Edit</a>
+                            <a class="text-decoration-none link-secondary"
+                               href="/lesson/delete/{{$lesson->id}}">Delete</a>
                         </td>
                     </tr>
                 @endforeach

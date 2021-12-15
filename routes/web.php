@@ -4,6 +4,7 @@ use App\Http\Controllers\LessonController;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,4 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/lessons/{course}', [LessonController::class, 'index'])->name('lessons');
+Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
+Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');

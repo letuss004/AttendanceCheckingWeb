@@ -21,6 +21,14 @@ class CreateStudentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
         });
+
+        $values = [
+            [
+                'user_id' => "BA9067",
+                'department_id' => 1,
+            ],
+        ];
+        DB::table('students')->insert($values);
     }
 
     /**

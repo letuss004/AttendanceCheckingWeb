@@ -10,9 +10,15 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
+use Request;
 
 class LessonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +27,7 @@ class LessonController extends Controller
      */
     public function index(Course $course)
     {
-        return view('lessons', compact('course'));
+        return view('lessons/index', compact('course'));
     }
 
     /**
@@ -59,12 +65,12 @@ class LessonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Lesson $lesson
-     * @return Response
+     * @param int $id
+     * @return Application|Factory|View
      */
-    public function edit(Lesson $lesson)
+    public function edit(int $id)
     {
-        //
+        return \view('lessons/edit', compact('id'));
     }
 
     /**

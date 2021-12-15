@@ -20,6 +20,13 @@ class CreateAdminsTable extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });
+        $values = [
+            [
+                'user_id' => "ADM001",
+                'department_id' => 1,
+            ],
+        ];
+        DB::table('admins')->insert($values);
     }
 
     /**

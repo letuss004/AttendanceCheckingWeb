@@ -20,6 +20,24 @@ class CreateAttendancesTable extends Migration
             $table->unsignedBigInteger('student_id');
             $table->timestamps();
         });
+        $values = [
+            [
+                'attendance_status_id' => 1,
+                'lesson_id' => 1,
+                'student_id' => 1
+            ],
+            [
+                'attendance_status_id' => 1,
+                'lesson_id' => 2,
+                'student_id' => 1
+            ],
+            [
+                'attendance_status_id' => 1,
+                'lesson_id' => 1,
+                'student_id' => 1
+            ],
+        ];
+        DB::table('attendances')->insert($values);
     }
 
     /**
