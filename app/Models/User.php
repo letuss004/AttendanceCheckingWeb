@@ -95,9 +95,10 @@ class User extends Authenticatable
     ];
 
     /*
-     *
+     * Supper important
      */
     public $timestamps = true;
+    public $incrementing = false;
 
     public function student(): HasOne
     {

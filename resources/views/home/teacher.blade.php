@@ -27,7 +27,10 @@
                                 {{$course->courseList->name}}
                             </a>
                         </td>
-                        <td>Button Button</td>
+                        <td>
+                            <a class="text-decoration-none link-secondary" href="#">Edit</a>
+                            <a class="text-decoration-none link-secondary" href="#">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
