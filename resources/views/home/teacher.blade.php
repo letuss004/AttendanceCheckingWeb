@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @php
     $user = (new App\Models\User)->findOrFail(auth()->user()->getAuthIdentifier());
-    $courses = $user->teacher->courses;
+    $courses = [];
+    if (isset($user->teacher->courses)) {
+        $courses = $user->teacher->courses;
+    }
 @endphp
 @section('content')
     <div class="container">
