@@ -23,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read \App\Models\Admin $admin
  * @property-read \App\Models\CourseList $courseList
+ * @property-read \App\Models\CoursesRegistration|null $coursesRegistration
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lesson[] $lessons
  * @property-read int|null $lessons_count
  * @property-read \App\Models\Teacher $teacher
@@ -46,9 +47,9 @@ class Course extends Model
         return $this->hasMany(Lesson::class);
     }
 
-    public function coursesRegistrations(): HasMany
+    public function coursesRegistration(): HasOne
     {
-        return $this->hasMany(CoursesRegistration::class);
+        return $this->hasOne(CoursesRegistration::class);
     }
 
     public function admin(): BelongsTo
@@ -60,7 +61,6 @@ class Course extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
-
 
     public function courseList(): BelongsTo
     {

@@ -33,7 +33,7 @@ class CreateAttendancesTable extends Migration
             ],
             [
                 'attendance_status_id' => 1,
-                'lesson_id' => 1,
+                'lesson_id' => 3,
                 'student_id' => 1
             ],
         ];

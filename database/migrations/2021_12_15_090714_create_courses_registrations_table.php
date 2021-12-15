@@ -18,6 +18,7 @@ class CreateCoursesRegistrationsTable extends Migration
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('student_id');
             $table->timestamps();
+            $table->foreign('course_id')->references('id')->on('courses');
         });
         $values = [
             [

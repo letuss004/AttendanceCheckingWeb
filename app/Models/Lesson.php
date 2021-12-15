@@ -31,10 +31,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $name
+ * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereName($value)
  */
 class Lesson extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+    public $timestamps = true;
 
     public function attendances()
     {
