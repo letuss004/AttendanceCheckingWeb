@@ -30,15 +30,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
+Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::get('/lesson/create/{course_id}', [LessonController::class, 'create'])->name('lesson.create');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
 Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::get('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.course');
-Route::get('/admin/{student_id}/register/{course_id}', [CoursesRegistrationController::class, 'store'])->name('admin.register.course.student');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.course');
 
 
-Route::get('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
+Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
 Route::get('/student/test', [StudentController::class, 'index'])->name('test');

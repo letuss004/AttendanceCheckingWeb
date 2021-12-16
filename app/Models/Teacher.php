@@ -10,6 +10,27 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
+/**
+ * App\Models\Teacher
+ *
+ * @property string $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Course[] $courses
+ * @property-read int|null $courses_count
+ * @property-read \App\Models\Department $department
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lesson[] $lessons
+ * @property-read int|null $lessons_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\TeacherFactory factory(...$parameters)
+ * @method static Builder|Teacher newModelQuery()
+ * @method static Builder|Teacher newQuery()
+ * @method static Builder|Teacher query()
+ * @method static Builder|Teacher whereCreatedAt($value)
+ * @method static Builder|Teacher whereId($value)
+ * @method static Builder|Teacher whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Teacher extends Model
 {
     use HasFactory;

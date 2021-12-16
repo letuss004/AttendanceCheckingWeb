@@ -26,7 +26,7 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail('ba9067');
         $courses = Course::findOrFail(1);
-        dd($student->courses, $courses->students);
+        dd($student->courses, $courses->students, $courses->students_count, $courses->lessons);
     }
 
     /**

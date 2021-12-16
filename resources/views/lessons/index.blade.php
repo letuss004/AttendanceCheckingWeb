@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@php
-
-@endphp
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -21,8 +18,8 @@
                 @foreach($course->lessons as $lesson)
                     <tr>
                         <td>{{$lesson->id}}</td>
-                        <td>
-                            {{$lesson->name}}
+                        <td><a class="text-decoration-none link-dark"
+                               href="/lesson/show/{{$lesson->id}}">{{$lesson->name}}</a>
                         </td>
                         <td>{{$lesson->created_at}}</td>
                         <td>
@@ -39,9 +36,11 @@
                 </tbody>
             </table>
 
+            <h2>Student list</h2>
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th>No</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -49,21 +48,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($course->lessons as $lesson)
+                @foreach($users as $student)
                     <tr>
-                        <td>{{$lesson->id}}</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$student->id}}</td>
                         <td>
-                            {{$lesson->name}}
+                            {{$student->name}}
                         </td>
-                        <td>{{$lesson->created_at}}</td>
+                        <td>{{$student->email}}</td>
                         <td>
-                            {{count($lesson->attendances)}}/{{$student_count}}
-                        </td>
-                        <td>
-                            <a class="text-decoration-none link-warning"
-                               href="/lesson/edit/{{$lesson->id}}">Edit</a>
-                            <a class="text-decoration-none link-danger"
-                               href="/lesson/delete/{{$lesson->id}}">Delete</a>
+                            {{$student->department->department}}
                         </td>
                     </tr>
                 @endforeach

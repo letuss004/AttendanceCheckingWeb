@@ -37,6 +37,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Course whereTeacherId($value)
  * @method static Builder|Course whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|Course[] $students
+ * @property-read int|null $students_count
  */
 class Course extends Model
 {
@@ -52,7 +54,7 @@ class Course extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class, 'course_student');
+        return $this->belongsToMany(Student::class, 'course_student');
     }
 
     public function admin(): BelongsTo

@@ -7,6 +7,8 @@ use App\Models\Enrollment;
 use App\Models\Lesson;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -31,8 +33,13 @@ class LessonController extends Controller
     public function index(int $course_id)
     {
         $course = Course::findOrFail($course_id);
-        $student_count = count(Enrollment::findMany($course));
-        return view('lessons/index', compact('course', 'student_count'));
+        $students = $course->students;
+        $users = [];
+        foreach ($students as $student) {
+            array_push($users, (new User)->findOrFail($student->id));
+        }
+        $student_count = count($students);
+        return view('lessons/index', compact('course', 'student_count', 'students', 'users'));
     }
 
     /**
@@ -67,12 +74,14 @@ class LessonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Lesson $lesson
-     * @return Response
+     * @return Application|Factory|View|Response
      */
-    public function show(Lesson $lesson)
+    public function show(int $lesson_id)
     {
-        //
+        $lesson = Lesson::findOrFail($lesson_id);
+        $checked = $lesson->attendances;
+        dd($checked);
+        return \view('lessons/show', compact('lesson'));
     }
 
     /**
