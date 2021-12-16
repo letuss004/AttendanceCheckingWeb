@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Lesson;
@@ -34,6 +35,8 @@ class LessonController extends Controller
     {
         $course = Course::findOrFail($course_id);
         $students = $course->students;
+        $a = Student::findOrFail('BA9067');
+        $b = Course::findOrFail(1);
         $users = [];
         foreach ($students as $student) {
             array_push($users, (new User)->findOrFail($student->id));
@@ -74,14 +77,22 @@ class LessonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @return Application|Factory|View|Response
      */
     public function show(int $lesson_id)
     {
         $lesson = Lesson::findOrFail($lesson_id);
-        $checked = $lesson->attendances;
-        dd($checked);
-        return \view('lessons/show', compact('lesson'));
+        $students = $lesson->course->students;
+        $users = [];
+        foreach ($students as $student) {
+            $user = (new User)->findOrFail($student->id);
+            if ($student->attendances->where('lesson_id', '=', $lesson_id)->count() > 0) {
+                $user->setAttribute('status', 1);
+            } else {
+                $user->setAttribute('status', 0);
+            }
+            array_push($users, $user);
+        }
+        return view('lessons/show', compact('lesson', 'users'));
     }
 
     /**

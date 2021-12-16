@@ -16,9 +16,10 @@ class CreateCourseStudentPivotTable extends Migration
         Schema::create('course_student', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->string('student_id')->index();
+            $table->string('student_id');
             $table->timestamps();
             $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('student_id')->references('id')->on('students');
         });
         $values = [
             [
@@ -30,7 +31,13 @@ class CreateCourseStudentPivotTable extends Migration
             ], [
                 'course_id' => 3,
                 'student_id' => 'BA9067',
-            ],
+            ], [
+                'course_id' => 1,
+                'student_id' => 'BA9044',
+            ], [
+                'course_id' => 2,
+                'student_id' => 'BA9044',
+            ]
         ];
         DB::table('course_student')->insert($values);
     }

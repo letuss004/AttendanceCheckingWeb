@@ -19,6 +19,9 @@ class CreateAttendancesTable extends Migration
             $table->unsignedBigInteger('lesson_id');
             $table->string('student_id');
             $table->timestamps();
+            $table->foreign('attendance_status_id')->references('id')->on('attendance_statuses');
+            $table->foreign('lesson_id')->references('id')->on('lessons');
+            $table->foreign('student_id')->references('id')->on('students');
         });
         $values = [
             [

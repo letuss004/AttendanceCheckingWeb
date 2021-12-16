@@ -20,6 +20,10 @@ class CreateCoursesTable extends Migration
             $table->string('admin_id');
             $table->string('teacher_id');
             $table->timestamps();
+            $table->foreign('course_list_id')->references('id')->on('course_lists');
+            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+
         });
 
         $values = [

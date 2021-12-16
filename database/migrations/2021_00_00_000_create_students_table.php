@@ -22,6 +22,8 @@ class CreateStudentsTable extends Migration
         $values = [
             [
                 'id' => "BA9067",
+            ], [
+                'id' => "BA9044",
             ],
         ];
         DB::table('students')->insert($values);

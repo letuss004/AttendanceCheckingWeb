@@ -52,6 +52,14 @@ class CreateUsersTable extends Migration
                 'department_id' => 1,
                 'name' => 'Le Anh Tu',
                 'password' => Hash::make('tula.ba9067')],
+            [
+                'id' => 'BA9044',
+                'email' => 'test.ba9044@st.usth.edu.vn',
+                'username' => 'Test 044',
+                'user_type_id' => 1,
+                'department_id' => 3,
+                'name' => 'Nguyen Ngoc Khiem',
+                'password' => Hash::make('letuss004')],
         ];
         DB::table('users')->insert($values);
     }
