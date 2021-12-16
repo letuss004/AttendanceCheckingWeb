@@ -35,7 +35,8 @@ Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson
 Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.store');
+Route::get('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.store');
+Route::get('/admin/courses/register/{lesson_id}', [AdminController::class, 'store'])->name('student.create');
 
 
 Route::get('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
