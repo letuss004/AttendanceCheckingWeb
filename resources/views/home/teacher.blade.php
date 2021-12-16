@@ -1,43 +1,38 @@
 @extends('layouts.app')
 @php
     $user = (new App\Models\User)->findOrFail(auth()->user()->getAuthIdentifier());
+    $courses = [];
+    if (isset($user->teacher->courses)) {
+        $courses = $user->teacher->courses;
+    }
 @endphp
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <h2>Current Courses</h2>
+            <h2>Current Classes</h2>
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>No</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(\App\Models\Lesson::find($user) as $course)
-
+                @foreach($courses as $course)
                     <tr>
                         <td>{{$course->id}}</td>
-                        <td>{{$course->name}}</td>
-                        <td>john@example.com</td>
+                        <td>
+                            <a class="text-decoration-none link-dark" href="/lessons/{{$course->id}}">
+                                {{$course->courseList->name}}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="text-decoration-none link-secondary" href="#">Edit</a>
+                            <a class="text-decoration-none link-secondary" href="#">Delete</a>
+                        </td>
                     </tr>
                 @endforeach
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                </tr>
                 </tbody>
             </table>
             <div class="col-md-8">

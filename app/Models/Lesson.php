@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
@@ -31,12 +32,20 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $name
+ * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereName($value)
  */
 class Lesson extends Model
 {
     use HasFactory;
 
-    public function attendances()
+    /*
+     * Supper important
+     */
+    protected $guarded = [];
+    public $timestamps = true;
+
+    public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
     }

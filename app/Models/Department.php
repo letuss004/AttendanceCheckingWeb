@@ -31,6 +31,9 @@ class Department extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    public $timestamps = true;
+
     public function student(): HasOne
     {
         return $this->hasOne(Student::class);

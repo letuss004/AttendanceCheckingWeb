@@ -35,6 +35,9 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    public $timestamps = true;
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);

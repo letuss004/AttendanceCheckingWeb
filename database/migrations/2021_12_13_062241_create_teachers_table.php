@@ -14,16 +14,15 @@ class CreateTeachersTable extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id')->index();
-            $table->unsignedBigInteger('department_id');
+            $table->string('id')->primary();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
 
         $values = [
-            ['user_id' => 'ICT067',
-                'department_id' => 1],
+            [
+                'id' => 'ICT067'
+            ],
         ];
         DB::table('teachers')->insert($values);
     }

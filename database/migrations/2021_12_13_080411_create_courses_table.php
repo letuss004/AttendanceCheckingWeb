@@ -17,24 +17,24 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_list_id');
-            $table->unsignedBigInteger('admin_id');
-            $table->unsignedBigInteger('teacher_id');
+            $table->string('admin_id');
+            $table->string('teacher_id');
             $table->timestamps();
         });
 
         $values = [
             [
                 'course_list_id' => 1,
-                'teacher_id' => 1,
-                'admin_id' => 1
+                'teacher_id' => 'ICT067',
+                'admin_id' => 'ADM001'
             ], [
                 'course_list_id' => 4,
-                'teacher_id' => 1,
-                'admin_id' => 1
+                'teacher_id' => 'ICT067',
+                'admin_id' => 'ADM001'
             ], [
                 'course_list_id' => 6,
-                'teacher_id' => 1,
-                'admin_id' => 1
+                'teacher_id' => 'ICT067',
+                'admin_id' => 'ADM001'
             ]
         ];
         DB::table('courses')->insert($values);
