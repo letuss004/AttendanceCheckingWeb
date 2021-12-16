@@ -39,7 +39,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Teacher extends Model
 {
     use HasFactory;
-
+    /*
+         * Supper important
+         */
+    protected $guarded = [];
+    public $timestamps = true;
+    public $incrementing = false;
     public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeachersTable extends Migration
+class CreateCoursesRegistrationStudentPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,12 @@ class CreateTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('teachers', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('courses_registration_student', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('courses_registration_id');
+            $table->string('student_id');
             $table->timestamps();
-            $table->foreign('id')->references('id')->on('users');
         });
-
-        $values = [
-            [
-                'id' => 'ICT067'
-            ],
-        ];
-        DB::table('teachers')->insert($values);
     }
 
     /**
@@ -34,6 +28,6 @@ class CreateTeachersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('courses_registration_student');
     }
 }

@@ -17,7 +17,7 @@ class CreateAttendancesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('attendance_status_id');
             $table->unsignedBigInteger('lesson_id');
-            $table->unsignedBigInteger('student_id');
+            $table->string('student_id');
             $table->timestamps();
         });
         $values = [

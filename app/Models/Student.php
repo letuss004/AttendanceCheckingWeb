@@ -35,7 +35,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Student extends Model
 {
     use HasFactory;
-
+    /*
+         * Supper important
+         */
+    protected $guarded = [];
+    public $timestamps = true;
+    public $incrementing = false;
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);

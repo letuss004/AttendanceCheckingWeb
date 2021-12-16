@@ -38,6 +38,13 @@ class Admin extends Model
 {
     use HasFactory;
 
+    /*
+         * Supper important
+         */
+    protected $guarded = [];
+    public $timestamps = true;
+    public $incrementing = false;
+
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);

@@ -97,6 +97,7 @@ class User extends Authenticatable
     /*
      * Supper important
      */
+    protected $guarded = [];
     public $timestamps = true;
     public $incrementing = false;
 

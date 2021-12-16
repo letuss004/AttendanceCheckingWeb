@@ -34,7 +34,7 @@ class CoursesRegistration extends Model
 {
     use HasFactory;
 
-    public function student(): BelongsToMany
+    public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class);
     }

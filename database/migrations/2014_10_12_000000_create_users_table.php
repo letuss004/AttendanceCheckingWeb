@@ -15,16 +15,16 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->string('id')->primary();
             $table->string('email')->unique();
             $table->string('username')->unique();
-            $table->unsignedBigInteger('user_type_id')->index();
+            $table->unsignedBigInteger('user_type_id');
             $table->string('name');
             $table->string('password');
+            $table->unsignedBigInteger('department_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->primary('id');
         });
 
         $values = [
@@ -34,12 +34,14 @@ class CreateUsersTable extends Migration
                 'username' => 'LAT admin',
                 'user_type_id' => 3,
                 'name' => 'Le Anh Tu',
+                'department_id' => 1,
                 'password' => Hash::make('letuss004')],
             [
                 'id' => 'ICT067',
                 'email' => 'tula.ba9067@usth.edu.vn',
                 'username' => 'LAT teacher',
                 'user_type_id' => 2,
+                'department_id' => 1,
                 'name' => 'Le Anh Tu',
                 'password' => Hash::make('tula.ba9067')],
             [
@@ -47,6 +49,7 @@ class CreateUsersTable extends Migration
                 'email' => 'tula.ba9067@st.usth.edu.vn',
                 'username' => 'BA9067 Le Anh Tu',
                 'user_type_id' => 1,
+                'department_id' => 1,
                 'name' => 'Le Anh Tu',
                 'password' => Hash::make('tula.ba9067')],
         ];
