@@ -24,17 +24,17 @@ class CreateAttendancesTable extends Migration
             [
                 'attendance_status_id' => 1,
                 'lesson_id' => 1,
-                'student_id' => 1
+                'student_id' => 'BA9067'
             ],
             [
                 'attendance_status_id' => 1,
                 'lesson_id' => 2,
-                'student_id' => 1
+                'student_id' => 'BA9067'
             ],
             [
                 'attendance_status_id' => 1,
                 'lesson_id' => 3,
-                'student_id' => 1
+                'student_id' => 'BA9067'
             ],
         ];
         DB::table('attendances')->insert($values);

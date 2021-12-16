@@ -23,13 +23,13 @@ class CreateCoursesRegistrationsTable extends Migration
         $values = [
             [
                 'course_id' => 1,
-                'student_id' => 1,
+                'student_id' => 'BA9067',
             ], [
                 'course_id' => 2,
-                'student_id' => 1,
+                'student_id' => 'BA9067',
             ], [
                 'course_id' => 3,
-                'student_id' => 1,
+                'student_id' => 'BA9067',
             ],
         ];
         DB::table('courses_registrations')->insert($values);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
 use App\Models\Lesson;
@@ -34,7 +35,7 @@ Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson
 Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::post('/student/register/{course_id}', [StudentController::class, 'store'])->name('student.store');
-Route::get('/student/register/{course_id}', [StudentController::class, 'create'])->name('student.create');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.store');
 
 
+Route::get('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');

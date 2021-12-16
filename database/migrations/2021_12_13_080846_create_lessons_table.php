@@ -27,27 +27,27 @@ class CreateLessonsTable extends Migration
             [
                 'course_id' => 1,
                 'name'=>'Introduction',
-                'teacher_id' => 1],
+                'teacher_id' => 'ICT067'],
             [
                 'course_id' => 2,
                 'name'=>'Introduction',
-                'teacher_id' => 1],
+                'teacher_id' => 'ICT067'],
             [
                 'course_id' => 3,
                 'name'=>'Introduction',
-                'teacher_id' => 1],
+                'teacher_id' => 'ICT067'],
             [
                 'course_id' => 1,
                 'name'=>'Second lecture',
-                'teacher_id' => 1],
+                'teacher_id' => 'ICT067'],
             [
                 'course_id' => 2,
                 'name'=>'Second lecture',
-                'teacher_id' => 1],
+                'teacher_id' => 'ICT067'],
             [
                 'course_id' => 3,
                 'name'=>'Second lecture',
-                'teacher_id' => 1],
+                'teacher_id' => 'ICT067'],
         ];
         DB::table('lessons')->insert($values);
     }

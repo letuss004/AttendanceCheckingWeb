@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\Lesson;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
@@ -12,6 +14,7 @@ class StudentController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,18 +38,24 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreStudentRequest  $request
+     * @param \App\Http\Requests\StoreStudentRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStudentRequest $request)
+    public function store(StoreStudentRequest $request, int $lesson_id)
     {
-        //
+        $lesson = Lesson::findOrFail($lesson_id);
+        Attendance::create([
+           'attendance_status_id'=>1,
+           'lesson_id'=>$lesson_id,
+           'student_id'=>'BA9067',
+        ]);
+        return "success";
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Student  $student
+     * @param \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
     public function show(Student $student)
@@ -57,7 +66,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Student  $student
+     * @param \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
     public function edit(Student $student)
@@ -68,8 +77,8 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStudentRequest  $request
-     * @param  \App\Models\Student  $student
+     * @param \App\Http\Requests\UpdateStudentRequest $request
+     * @param \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateStudentRequest $request, Student $student)
@@ -80,7 +89,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Student  $student
+     * @param \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
     public function destroy(Student $student)

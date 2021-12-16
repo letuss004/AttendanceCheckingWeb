@@ -25,16 +25,16 @@ class CreateCoursesTable extends Migration
         $values = [
             [
                 'course_list_id' => 1,
-                'teacher_id' => 1,
-                'admin_id' => 1
+                'teacher_id' => 'ICT067',
+                'admin_id' => 'ADM001'
             ], [
                 'course_list_id' => 4,
-                'teacher_id' => 1,
-                'admin_id' => 1
+                'teacher_id' => 'ICT067',
+                'admin_id' => 'ADM001'
             ], [
                 'course_list_id' => 6,
-                'teacher_id' => 1,
-                'admin_id' => 1
+                'teacher_id' => 'ICT067',
+                'admin_id' => 'ADM001'
             ]
         ];
         DB::table('courses')->insert($values);
