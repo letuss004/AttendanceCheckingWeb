@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -12,20 +13,22 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Student extends Model
 {
     use HasFactory;
+
     /*
-         * Supper important
-         */
+     * Supper important
+     */
     protected $guarded = [];
     public $timestamps = true;
     public $incrementing = false;
+
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
     }
 
-    public function coursesRegistrations(): HasMany
+    public function courses(): BelongsToMany
     {
-        return $this->hasMany(CoursesRegistration::class);
+        return $this->belongsToMany(Course::class, 'course_student');
     }
 
     public function department(): BelongsTo

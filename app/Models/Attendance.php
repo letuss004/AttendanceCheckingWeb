@@ -34,7 +34,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Attendance extends Model
 {
     use HasFactory;
-    protected $guarded  = [];
+
+    protected $guarded = [];
+    public $timestamps = true;
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);

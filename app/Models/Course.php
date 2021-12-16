@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
-
 
 
 /**
@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read \App\Models\Admin $admin
  * @property-read \App\Models\CourseList $courseList
- * @property-read \App\Models\CoursesRegistration|null $coursesRegistration
+ * @property-read \App\Models\Enrollment|null $coursesRegistration
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lesson[] $lessons
  * @property-read int|null $lessons_count
  * @property-read \App\Models\Teacher $teacher
@@ -42,14 +42,17 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    public $timestamps = true;
+
     public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);
     }
 
-    public function coursesRegistration(): HasOne
+    public function students(): BelongsToMany
     {
-        return $this->hasOne(CoursesRegistration::class);
+        return $this->belongsToMany(Course::class, 'course_student');
     }
 
     public function admin(): BelongsTo

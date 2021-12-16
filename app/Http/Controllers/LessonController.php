@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\CoursesRegistration;
+use App\Models\Enrollment;
 use App\Models\Lesson;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
@@ -31,7 +31,7 @@ class LessonController extends Controller
     public function index(int $course_id)
     {
         $course = Course::findOrFail($course_id);
-        $student_count = count(CoursesRegistration::findMany($course));
+        $student_count = count(Enrollment::findMany($course));
         return view('lessons/index', compact('course', 'student_count'));
     }
 

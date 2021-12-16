@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CoursesRegistrationController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
 use App\Models\Lesson;
@@ -35,8 +36,9 @@ Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson
 Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::get('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.store');
-Route::get('/admin/courses/register/{lesson_id}', [AdminController::class, 'store'])->name('student.create');
+Route::get('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.course');
+Route::get('/admin/{student_id}/register/{course_id}', [CoursesRegistrationController::class, 'store'])->name('admin.register.course.student');
 
 
 Route::get('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
+Route::get('/student/test', [StudentController::class, 'index'])->name('test');

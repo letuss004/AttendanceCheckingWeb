@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Course;
+use App\Models\Enrollment;
 use App\Models\Lesson;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
@@ -22,7 +24,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $student = Student::findOrFail('ba9067');
+        $courses = Course::findOrFail(1);
+        dd($student->courses, $courses->students);
     }
 
     /**
@@ -45,9 +49,9 @@ class StudentController extends Controller
     {
         $lesson = Lesson::findOrFail($lesson_id);
         Attendance::create([
-           'attendance_status_id'=>1,
-           'lesson_id'=>$lesson_id,
-           'student_id'=>'BA9067',
+            'attendance_status_id' => 1,
+            'lesson_id' => $lesson_id,
+            'student_id' => 'BA9067',
         ]);
         return "success";
     }

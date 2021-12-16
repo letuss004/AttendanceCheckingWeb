@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoursesRegistrationsTable extends Migration
+class CreateCourseStudentPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCoursesRegistrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses_registrations', function (Blueprint $table) {
+        Schema::create('course_student', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->string('student_id')->index();
@@ -32,7 +32,7 @@ class CreateCoursesRegistrationsTable extends Migration
                 'student_id' => 'BA9067',
             ],
         ];
-        DB::table('courses_registrations')->insert($values);
+        DB::table('course_student')->insert($values);
     }
 
     /**
@@ -42,6 +42,6 @@ class CreateCoursesRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses_registrations');
+        Schema::dropIfExists('course_student');
     }
 }
