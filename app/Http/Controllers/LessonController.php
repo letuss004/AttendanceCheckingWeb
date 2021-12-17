@@ -35,8 +35,6 @@ class LessonController extends Controller
     {
         $course = Course::findOrFail($course_id);
         $students = $course->students;
-        $a = Student::findOrFail('BA9067');
-        $b = Course::findOrFail(1);
         $users = [];
         foreach ($students as $student) {
             array_push($users, (new User)->findOrFail($student->id));

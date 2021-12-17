@@ -61,7 +61,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="user_type_id" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+                                <label for="user_type_id"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
 
                                 <div class="col-md-6">
                                     <select id="user_type_id"
@@ -73,6 +74,27 @@
                                         <option value="3">Admin</option>
                                     </select>
                                     @error('user_type_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="department_id"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="department_id"
+                                            class="form-select form-control @error('department_id') is-invalid @enderror"
+                                            required autocomplete="department_id" name="department_id">
+                                        <option selected>Open this to select</option>
+                                        <option value="1">ICT</option>
+                                        <option value="2">FST</option>
+                                        <option value="3">CS</option>
+                                    </select>
+                                    @error('department_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
