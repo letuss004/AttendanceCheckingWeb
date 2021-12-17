@@ -163,7 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         // ide helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
+        // qr
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,7 +233,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
 
 ];

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoursesRegistrationController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\StudentController;
 use App\Models\Lesson;
 use App\Models\Student;
@@ -27,6 +28,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/generate-qrcode', [QrCodeController::class, 'index']);
 
 
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
