@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CoursesRegistrationController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\StudentController;
@@ -39,7 +38,7 @@ Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson
 Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.course');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.course.store');
 
 
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
