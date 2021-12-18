@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
-
 /**
  * App\Models\Lesson
  *
@@ -34,6 +33,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @mixin \Eloquent
  * @property string|null $name
  * @method static \Illuminate\Database\Eloquent\Builder|Lesson whereName($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Qr[] $qrs
+ * @property-read int|null $qrs_count
  */
 class Lesson extends Model
 {
@@ -58,5 +59,10 @@ class Lesson extends Model
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function qrs(): HasMany
+    {
+        return $this->hasMany(Qr::class, 'lesson_id', 'id');
     }
 }

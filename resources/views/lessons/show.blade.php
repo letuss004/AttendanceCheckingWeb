@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <h2>{{$lesson->name}}</h2>
-            <a href="#">Create QR</a>
+            <a href="/qr/generate/{{$lesson->id}}">Create QR</a>
             <table class="table table-striped">
                 <thead>
                 <tr>

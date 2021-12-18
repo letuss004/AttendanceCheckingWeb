@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQrsTable extends Migration
+class CreateQrStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateQrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('qrs', function (Blueprint $table) {
+        Schema::create('qr_statuses', function (Blueprint $table) {
             $table->id();
+            $table->string('status');
             $table->timestamps();
         });
+        $values = [
+            ['status' => 'active',], ['status' => 'paused',], ['status' => 'stopped'],
+        ];
+        DB::table('qr_statuses')->insert($values);
     }
 
     /**
@@ -26,6 +31,6 @@ class CreateQrsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qrs');
+        Schema::dropIfExists('qr_statuses');
     }
 }

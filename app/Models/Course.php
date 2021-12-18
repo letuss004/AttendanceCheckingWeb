@@ -39,6 +39,8 @@ use Illuminate\Support\Carbon;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|Course[] $students
  * @property-read int|null $students_count
+ * @property int $active
+ * @method static Builder|Course whereActive($value)
  */
 class Course extends Model
 {

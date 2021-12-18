@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
 use App\Models\Lesson;
 use App\Models\Student;
@@ -27,7 +27,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/generate-qrcode', [QrCodeController::class, 'index']);
 
 
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
@@ -36,6 +35,10 @@ Route::get('/lesson/create/{course_id}', [LessonController::class, 'create'])->n
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
 Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
+
+Route::get('/qr/generate/{lesson_id}', [QrController::class, 'index'])->name('qr.home');
+Route::get('/qr/receive/{lesson_id}/{qr_id}/{student_id}', [QrController::class, 'store'])->name('qr.store');
 
 
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.course.store');

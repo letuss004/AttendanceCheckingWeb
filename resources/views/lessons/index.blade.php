@@ -18,18 +18,18 @@
                 @foreach($course->lessons as $lesson)
                     <tr>
                         <td>{{$lesson->id}}</td>
-                        <td><a class="text-decoration-none link-dark"
-                               href="/lesson/show/{{$lesson->id}}">{{$lesson->name}}</a>
+                        <td>
+                            <a class="text-decoration-none link-dark" href="/lesson/show/{{$lesson->id}}">
+                                {{$lesson->name}}
+                            </a>
                         </td>
                         <td>{{$lesson->created_at}}</td>
+                        <td>{{count($lesson->attendances)}}/{{$student_count}}</td>
                         <td>
-                            {{count($lesson->attendances)}}/{{$student_count}}
-                        </td>
-                        <td>
-                            <a class="text-decoration-none link-warning"
-                               href="/lesson/edit/{{$lesson->id}}">Edit</a>
-                            <a class="text-decoration-none link-danger"
-                               href="/lesson/delete/{{$lesson->id}}">Delete</a>
+                            <a class="text-decoration-none link-warning" href="/lesson/edit/{{$lesson->id}}">
+                                Edit</a>
+                            <a class="text-decoration-none link-danger" href="/lesson/delete/{{$lesson->id}}">
+                                Delete</a>
                         </td>
                     </tr>
                 @endforeach
@@ -52,13 +52,9 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$student->id}}</td>
-                        <td>
-                            {{$student->name}}
-                        </td>
+                        <td>{{$student->name}}</td>
                         <td>{{$student->email}}</td>
-                        <td>
-                            {{$student->department->department}}
-                        </td>
+                        <td>{{$student->department->department}}</td>
                     </tr>
                 @endforeach
                 </tbody>

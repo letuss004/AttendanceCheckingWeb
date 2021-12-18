@@ -30,6 +30,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $qr_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereQrId($value)
+ * @property-read \App\Models\Qr $qr
  */
 class Attendance extends Model
 {
@@ -51,5 +54,10 @@ class Attendance extends Model
     public function attendanceStatus(): BelongsTo
     {
         return $this->belongsTo(AttendanceStatus::class);
+    }
+
+    public function qr(): BelongsTo
+    {
+        return $this->belongsTo(Qr::class, 'qr_id', 'id');
     }
 }
