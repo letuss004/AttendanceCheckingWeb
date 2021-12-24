@@ -101,7 +101,15 @@ class User extends Authenticatable
     protected $guarded = [];
     public $timestamps = true;
     public $incrementing = false;
+    protected $rememberTokenName = true;
 
+    /**
+     * @param Contracts\HasAbilities $accessToken
+     */
+    public function setAccessToken(Contracts\HasAbilities $accessToken): void
+    {
+        $this->accessToken = $accessToken;
+    }
     public function student(): HasOne
     {
         return $this->hasOne(Student::class);

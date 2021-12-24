@@ -40,6 +40,7 @@ class CreateAttendancesTable extends Migration
             ],
         ];
         DB::table('attendances')->insert($values);
+
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,15 +20,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read \App\Models\Attendance|null $attendance
  * @property-read \App\Models\Lesson $lesson
  * @method static \Database\Factories\QrFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Qr newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Qr newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Qr query()
- * @method static \Illuminate\Database\Eloquent\Builder|Qr whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Qr whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Qr whereLessonId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Qr whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Qr whereQrStatusId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Qr whereUpdatedAt($value)
+ * @method static Builder|Qr newModelQuery()
+ * @method static Builder|Qr newQuery()
+ * @method static Builder|Qr query()
+ * @method static Builder|Qr whereCreatedAt($value)
+ * @method static Builder|Qr whereId($value)
+ * @method static Builder|Qr whereLessonId($value)
+ * @method static Builder|Qr whereName($value)
+ * @method static Builder|Qr whereQrStatusId($value)
+ * @method static Builder|Qr whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Qr extends Model

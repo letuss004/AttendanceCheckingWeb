@@ -9,6 +9,9 @@ use App\Models\Lesson;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\User;
+use Illuminate\Testing\Fluent\Concerns\Has;
+use Request;
 
 class StudentController extends Controller
 {
@@ -100,4 +103,5 @@ class StudentController extends Controller
     {
         //
     }
+
 }

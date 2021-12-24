@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
+use App\Models\Attendance;
 use App\Models\Lesson;
 use App\Models\Student;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +40,6 @@ Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('l
 
 
 Route::get('/qr/generate/{lesson_id}', [QrController::class, 'index'])->name('qr.home');
-Route::get('/qr/receive/{lesson_id}/{qr_id}/{student_id}', [QrController::class, 'store'])->name('qr.store');
 
 
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.course.store');
@@ -46,3 +47,6 @@ Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->n
 
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
 Route::get('/student/test', [StudentController::class, 'index'])->name('test');
+
+
+Route::get('/attendance/{lesson_id}/{qr_id}/{student_id}', [AttendanceController::class, 'store'])->name('attendance.store');

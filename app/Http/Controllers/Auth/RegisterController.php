@@ -79,6 +79,7 @@ class RegisterController extends Controller
             'department_id' => $data['department_id'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->createToken('remember_token')->accessToken;
         if ($data['user_type_id'] == 1) {
             Student::create([
                 'id' => $data['id']

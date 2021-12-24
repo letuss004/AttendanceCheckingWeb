@@ -8,11 +8,13 @@
             </div>
 
             <div class="card-body">
-                {!! QrCode::size(300)->generate('https://127.0.0.1:8000/qr/receive/' . $lesson->id . '/' . $qr->id . '/') !!}
+                {!! QrCode::size(300)->generate('https://127.0.0.1:8000/attendance/' . $lesson->id . '/' . $qr->id . '/') !!}
             </div>
 
             <div class="card-body">
-                {{'https://127.0.0.1:8000/qr/receive/' . $lesson->id . '/' . $qr->id . '/'}}
+                <a href="{{'/attendance/' . $lesson->id . '/' . $qr->id . '/'. 'BA9044'}}">
+                    {{'https://127.0.0.1:8000/attendance/' . $lesson->id . '/' . $qr->id . '/BA9044'}}
+                </a>
             </div>
         </div>
     </div>
