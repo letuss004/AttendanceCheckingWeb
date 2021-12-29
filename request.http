@@ -1,5 +1,5 @@
 ###
-POST http://127.0.0.1:8000/api/auth/login
+POST http://192.168.0.103:8000/api/auth/login
 Content-Type: application/json
 
 {
@@ -7,5 +7,16 @@ Content-Type: application/json
     "password": "letuss004"
 }
 
+###
+POST http://192.168.0.103:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "letuss004",
+    "password": "LETUSS004"
+}
+
+###
+POST http://192.168.0.103:8000/api/auth/logout
 
 

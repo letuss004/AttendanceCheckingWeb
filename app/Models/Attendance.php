@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -33,6 +34,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $qr_id
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereQrId($value)
  * @property-read \App\Models\Qr $qr
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
  */
 class Attendance extends Model
 {
@@ -59,5 +62,10 @@ class Attendance extends Model
     public function qr(): BelongsTo
     {
         return $this->belongsTo(Qr::class, 'qr_id', 'id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
     }
 }

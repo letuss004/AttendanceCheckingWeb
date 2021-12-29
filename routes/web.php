@@ -31,6 +31,8 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+Route::get('/attendance/test', [AttendanceController::class, 'create']);
+
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
 Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::get('/lesson/create/{course_id}', [LessonController::class, 'create'])->name('lesson.create');
@@ -49,4 +51,4 @@ Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store
 Route::get('/student/test', [StudentController::class, 'index'])->name('test');
 
 
-Route::get('/attendance/{lesson_id}/{qr_id}/{student_id}', [AttendanceController::class, 'store'])->name('attendance.store');
+

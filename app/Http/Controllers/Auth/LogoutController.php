@@ -12,7 +12,7 @@ class LogoutController
         $user = User::findOrFail(auth()->user()->getAuthIdentifier());
         $user->tokens()->delete();
         return [
-            'message' => 'Logged out'
+            'message' => 'success'
         ];
     }
 }

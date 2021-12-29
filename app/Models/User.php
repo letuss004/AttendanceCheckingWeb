@@ -110,9 +110,10 @@ class User extends Authenticatable
     {
         $this->accessToken = $accessToken;
     }
+
     public function student(): HasOne
     {
-        return $this->hasOne(Student::class);
+        return $this->hasOne(Student::class, 'id', 'id');
     }
 
     public function department(): HasOne

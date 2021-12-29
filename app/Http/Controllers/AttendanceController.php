@@ -6,6 +6,12 @@ use App\Models\Attendance;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
 use App\Models\Qr;
+use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use \App\Models\Image;
 
 class AttendanceController extends Controller
 {
@@ -17,7 +23,7 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -26,48 +32,101 @@ class AttendanceController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Request data convention: b: back, f: front, s: status
+     * @return
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user = User::find(auth()->user()->getAuthIdentifier());
+        $attendance = Attendance::create([
+            'attendance_status_id' => 1,
+            'qr_id' => 1,
+            'lesson_id' => 1,
+            'student_id' => 'BA9067'
+        ]);
+
+        $image = Image::create([
+            'attendance_id' => $attendance->id,
+            'path' => "test Test TEST",
+        ]);
+        dd($attendance, $image);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param StoreAttendanceRequest $request
-     * @return string
+     * @return Application|ResponseFactory|Response
      */
-    public function store(StoreAttendanceRequest $request, int $lesson_id, int $qr_id, string $student_id)
+    public function store(StoreAttendanceRequest $request)
     {
-        $request->validate([
-            // do st here
+        $data = $request->validate([
+            'lesson_id' => ['required',],
+            'qr_id' => ['required',],
+            'student_id' => ['required',],
+            'b1' => ['required', 'image'],
+//            'b1s' => ['required', 'string'],
+            'b2' => ['required', 'image'],
+//            'b2s' => ['required', 'string'],
+            'b3' => ['required', 'image'],
+//            'b3s' => ['required', 'string'],
+            'f1' => ['required', 'image'],
+//            'f1s' => ['required', 'string'],
+            'f2' => ['required', 'image'],
+//            'f2s' => ['required', 'string'],
         ]);
-        $qr = Qr::findOrFail($qr_id);
+
+        $qr = Qr::findOrFail($data['qr_id']);
         $status = $qr->qr_status_id;
+        $user = User::findOrFail(auth()->user()->getAuthIdentifier());
+
+        $b1Path = request()->file('b1')->store('uploads', 'public');
+        $b2Path = request()->file('b2')->store('uploads', 'public');
+        $b3Path = request()->file('b3')->store('uploads', 'public');
+        $f1Path = request()->file('f1')->store('uploads', 'public');
+        $f2Path = request()->file('f2')->store('uploads', 'public');
+
         if ($status == 1) {
-            Attendance::create([
+            $attendance = Attendance::create([
                 'attendance_status_id' => 1,
-                'qr_id' => $qr_id,
-                'lesson_id' => $lesson_id,
-                'student_id' => $student_id
+                'qr_id' => $data['qr_id'],
+                'lesson_id' => $data['lesson_id'],
+                'student_id' => $data['student_id']
             ]);
-            return 'success';
+            Image::create([
+                'attendance_id' => $attendance->id,
+                'path' => $b1Path,
+            ]);
+            Image::create([
+                'attendance_id' => $attendance->id,
+                'path' => $b2Path,
+            ]);
+            Image::create([
+                'attendance_id' => $attendance->id,
+                'path' => $b3Path,
+            ]);
+            Image::create([
+                'attendance_id' => $attendance->id,
+                'path' => $f1Path,
+            ]);
+            Image::create([
+                'attendance_id' => $attendance->id,
+                'path' => $f2Path,
+            ]);
+            return response(['message' => 'success']);
         } elseif ($status == 2) {
-            return 'this code is on paused';
+            return response(['message' => 'this code is on paused']);
         } elseif ($status == 3) {
-            return 'this code is stopped';
+            return response(['message' => 'this code is stopped']);
         }
-        return 'fail';
+        return response(['message' => 'fail']);
     }
 
     /**
      * Display the specified resource.
      *
      * @param \App\Models\Attendance $attendance
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Attendance $attendance)
     {
@@ -78,7 +137,7 @@ class AttendanceController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Attendance $attendance
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Attendance $attendance)
     {
@@ -90,7 +149,7 @@ class AttendanceController extends Controller
      *
      * @param \App\Http\Requests\UpdateAttendanceRequest $request
      * @param \App\Models\Attendance $attendance
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(UpdateAttendanceRequest $request, Attendance $attendance)
     {
@@ -101,10 +160,24 @@ class AttendanceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Attendance $attendance
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Attendance $attendance)
     {
         //
+    }
+
+    /*
+     *
+     */
+
+    private function countAttendanceStatus(int $b1, int $b2, int $b3, int $f1, int $f2)
+    {
+//        $a = ($b1 + $b2 + $b3 + $f1 + $f2);
+//        $b = $a / 5;
+//        if ($b >= $a * 0.6 ) {
+//
+//        }
+        return 3;
     }
 }
