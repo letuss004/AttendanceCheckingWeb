@@ -2,13 +2,14 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center ">
-            <h2 class="text-center pb-2">{{$course->courseList->name}} Classes</h2>
+            <h2 class="text-center pb-md-5">{{$course->courseList->name}} Classes</h2>
             <div class="d-flex justify-content-between p-0">
                 <div class="my-2">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new_class_modal">New lesson
                     </button>
+                    <a class="btn btn-primary">Full</a>
                 </div>
-                <div class="my-2 search">
+                <div class="my-2 search ">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
             </div>
@@ -89,6 +90,7 @@
             </div>
         </div>
     </div>
+    <!-- Create Class Modal -->
     <!-- Create Class Modal -->
     <div class="modal fade" id="new_class_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">

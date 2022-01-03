@@ -8,7 +8,9 @@
                     <button id="qr_scan" type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">QR Scan
                     </button>
+
                 </div>
+
                 <label class="my-2 search">
                     <input type="text" class="form-control" placeholder="Search">
                 </label>
@@ -80,7 +82,7 @@
                     <button class="btn btn-primary" data-bs-target="#staticBackdrop"
                             data-bs-toggle="modal" data-bs-dismiss="modal">Back
                     </button>
-                    <button id="qr_close" class="btn btn-danger" data-bs-target="#staticBackdrop"
+                    <button id="qr_close" class="btn btn-danger " data-bs-target="#staticBackdrop"
                             data-bs-dismiss="modal">Close
                     </button>
                 </div>

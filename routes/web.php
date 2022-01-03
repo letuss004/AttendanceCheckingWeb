@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
@@ -38,11 +39,14 @@ Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesso
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
+Route::post('/courses/attendances/{course_id}', [CourseController::class, 'index'])->name('course.attendance');
+
+
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');
 Route::post('/qr/close/', [QrController::class, 'update'])->name('qr.close');
 
 
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.course.store');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.courses.store');
 
 
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');

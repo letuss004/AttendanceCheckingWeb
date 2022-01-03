@@ -11,17 +11,23 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.js') }}" defer></script>
+    {{--    <script src="{{ asset('js/bootstrap.js') }}" defer></script>--}}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    {{--    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">--}}
 </head>
 <body>
 <div id="app">
@@ -44,13 +50,11 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        </a>
-
-
-                    </li>
+{{--                    <li class="nav-item dropdown">--}}
+{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
+{{--                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))

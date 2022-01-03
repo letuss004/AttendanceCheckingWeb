@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attendance[] $attendances
  * @property-read int|null $attendances_count
- * @property-read \App\Models\Course $course
+ * @property-read \App\Models\Course $courses
  * @property-read \App\Models\Teacher $teacher
  * @method static LessonFactory factory(...$parameters)
  * @method static Builder|Lesson newModelQuery()

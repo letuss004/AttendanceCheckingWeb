@@ -70,7 +70,7 @@ class LessonController extends Controller
             'name' => $data['name'],
             'course_id' => $data['course_id'],
         ]);
-        return redirect('/lessons/' . $data['course_id']);
+        return \response([]);
     }
 
     /**
