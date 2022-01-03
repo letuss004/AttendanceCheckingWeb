@@ -34,8 +34,8 @@ Route::get('/attendance/test', [AttendanceController::class, 'create']);
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
 Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
-Route::post('/lesson/edit/', [LessonController::class, 'edit'])->name('lesson.edit');
-Route::post('/lesson/delete/', [LessonController::class, 'destroy'])->name('lesson.destroy');
+Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesson.update');
+Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');

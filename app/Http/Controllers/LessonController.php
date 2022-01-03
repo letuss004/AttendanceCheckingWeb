@@ -102,8 +102,8 @@ class LessonController extends Controller
      */
     public function edit(int $id)
     {
-        
-        return \response([]);
+
+        return \response(request());
     }
 
     /**
@@ -115,7 +115,14 @@ class LessonController extends Controller
      */
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'lesson_id' => 'required',
+        ]);
+        $lesson = Lesson::findOrFail($data['lesson_id']);
+        $lesson->name = $data['name'];
+        $lesson->save();
+        return \response([]);
     }
 
     /**
@@ -124,8 +131,13 @@ class LessonController extends Controller
      * @param \App\Models\Lesson $lesson
      * @return Response
      */
-    public function destroy(Lesson $lesson)
+    public function destroy(Lesson $lesson): Response
     {
-        //
+        $data = request()->validate([
+            'lesson_id' => 'required',
+        ]);
+        $lesson = Lesson::findOrFail($data['lesson_id']);
+        $lesson->delete();
+        return \response([]);
     }
 }
