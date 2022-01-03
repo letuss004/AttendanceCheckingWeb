@@ -9,8 +9,17 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <h2>Current Classes</h2>
-            <table class="table table-striped">
+            <h2 class="p-0 text-center">Current Classes</h2>
+            <div class="d-flex justify-content-between p-0">
+                <div class="my-2">
+                    <button type="button" class="btn btn-primary d-none">Create new class</button>
+                </div>
+                <div class="my-2 search">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </div>
+
+            <table class="table table-striped ">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -36,7 +45,6 @@
                 </tbody>
             </table>
             <div class="col-md-8">
-
             </div>
         </div>
     </div>

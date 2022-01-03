@@ -7,9 +7,7 @@
                 <h2>Simple QR Code</h2>
             </div>
 
-            <div class="card-body">
-                {!! QrCode::size(300)->generate('https://127.0.0.1:8000/attendance/' . $lesson->id . '/' . $qr->id . '/') !!}
-            </div>
+
 
             <div class="card-body">
                 <a href="{{'/attendance/' . $lesson->id . '/' . $qr->id . '/'. 'BA9044'}}">

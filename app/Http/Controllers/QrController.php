@@ -10,9 +10,15 @@ use App\Http\Requests\UpdateQrRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Response;
 
 class QrController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +36,7 @@ class QrController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -69,8 +75,8 @@ class QrController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Qr $qr
-     * @return \Illuminate\Http\Response
+     * @param Qr $qr
+     * @return Response
      */
     public function show(Qr $qr)
     {
@@ -80,31 +86,33 @@ class QrController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Qr $qr
-     * @return \Illuminate\Http\Response
+     * @param int $qr_id
+     * @return Response
      */
-    public function edit(Qr $qr)
+    public function edit(int $qr_id): Response
     {
         //
+        return \response();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateQrRequest $request
-     * @param \App\Models\Qr $qr
-     * @return \Illuminate\Http\Response
+     * @param UpdateQrRequest $request
      */
-    public function update(UpdateQrRequest $request, Qr $qr)
+    public function update(UpdateQrRequest $request, int $qr_id)
     {
-        //
+        $qr = Qr::findOrFail($qr_id);
+        $qr->qr_status_id = 3;
+        $qr->save();
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Qr $qr
-     * @return \Illuminate\Http\Response
+     * @param Qr $qr
+     * @return Response
      */
     public function destroy(Qr $qr)
     {

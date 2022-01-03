@@ -42,6 +42,7 @@ Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('l
 
 
 Route::get('/qr/generate/{lesson_id}', [QrController::class, 'index'])->name('qr.home');
+Route::post('/qr/close/{qr_id}', [QrController::class, 'update'])->name('qr.close');
 
 
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.course.store');

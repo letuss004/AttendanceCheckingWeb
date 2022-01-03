@@ -13,7 +13,7 @@ class UpdateQrRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Models\Enrollment;
 use App\Models\Lesson;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
+use App\Models\Qr;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -80,6 +81,9 @@ class LessonController extends Controller
     {
         $lesson = Lesson::findOrFail($lesson_id);
         $students = $lesson->course->students;
+        $qr = Qr::create([
+            'lesson_id' => $lesson_id,
+        ]);
         $users = [];
         foreach ($students as $student) {
             $user = (new User)->findOrFail($student->id);
@@ -90,7 +94,7 @@ class LessonController extends Controller
             }
             array_push($users, $user);
         }
-        return view('lessons/show', compact('lesson', 'users'));
+        return view('lessons/show', compact('lesson', 'users', 'qr'));
     }
 
     /**

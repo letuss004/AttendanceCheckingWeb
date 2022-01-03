@@ -1,10 +1,17 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <h2>{{$course->courseList->name}} Classes</h2>
-            <a href="/lesson/create/{{$course->id}}">Create new lesson</a>
-            <table class="table table-striped">
+        <div class="row justify-content-center ">
+            <h2 class="text-center pb-2">{{$course->courseList->name}} Classes</h2>
+            <div class="d-flex justify-content-between p-0">
+                <div class="my-2">
+                    <a type="button" class="btn btn-primary" href="/lesson/create/{{$course->id}}">New lesson</a>
+                </div>
+                <div class="my-2 search">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-striped ">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -36,7 +43,17 @@
                 </tbody>
             </table>
 
-            <h2>Student list</h2>
+            <hr class="pt-1 mt-5">
+
+            <h2 class="text-center pb-2">Student list</h2>
+            <div class="d-flex justify-content-between p-0">
+                <div class="my-2">
+                    <button type="button" class="btn btn-primary d-none">Create new class</button>
+                </div>
+                <div class="my-2 search">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </div>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -63,5 +80,7 @@
 
             </div>
         </div>
+
+
     </div>
 @endsection
