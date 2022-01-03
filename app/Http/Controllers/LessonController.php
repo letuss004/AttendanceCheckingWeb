@@ -102,7 +102,8 @@ class LessonController extends Controller
      */
     public function edit(int $id)
     {
-        return \view('lessons/edit', compact('id'));
+        
+        return \response([]);
     }
 
     /**
