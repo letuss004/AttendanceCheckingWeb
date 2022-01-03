@@ -81,9 +81,6 @@ class LessonController extends Controller
     {
         $lesson = Lesson::findOrFail($lesson_id);
         $students = $lesson->course->students;
-        $qr = Qr::create([
-            'lesson_id' => $lesson_id,
-        ]);
         $users = [];
         foreach ($students as $student) {
             $user = (new User)->findOrFail($student->id);
@@ -94,7 +91,7 @@ class LessonController extends Controller
             }
             array_push($users, $user);
         }
-        return view('lessons/show', compact('lesson', 'users', 'qr'));
+        return view('lessons/show', compact('lesson', 'users'));
     }
 
     /**

@@ -5,9 +5,6 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
-use App\Models\Attendance;
-use App\Models\Lesson;
-use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -33,16 +30,16 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/attendance/test', [AttendanceController::class, 'create']);
 
+
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
 Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
-Route::get('/lesson/create/{course_id}', [LessonController::class, 'create'])->name('lesson.create');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
-Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
-Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+Route::post('/lesson/edit/', [LessonController::class, 'edit'])->name('lesson.edit');
+Route::post('/lesson/delete/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::get('/qr/generate/{lesson_id}', [QrController::class, 'index'])->name('qr.home');
-Route::post('/qr/close/{qr_id}', [QrController::class, 'update'])->name('qr.close');
+Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');
+Route::post('/qr/close/', [QrController::class, 'update'])->name('qr.close');
 
 
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.course.store');

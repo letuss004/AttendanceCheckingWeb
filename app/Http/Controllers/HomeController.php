@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
@@ -36,5 +37,15 @@ class HomeController extends Controller
             return view('home/admin');
         }
         return view('home/home');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return response(['message' => 'success']);
     }
 }

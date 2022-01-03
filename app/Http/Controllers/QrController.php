@@ -11,6 +11,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QrController extends Controller
 {
@@ -26,11 +27,8 @@ class QrController extends Controller
      */
     public function index(int $lesson_id)
     {
-        $lesson = Lesson::findOrFail($lesson_id);
-        $qr = Qr::create([
-            'lesson_id' => $lesson_id,
-        ]);
-        return view('qrcode', compact('lesson', 'qr'));
+
+        return view('qrcode');
     }
 
     /**
@@ -38,9 +36,21 @@ class QrController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        $data = request()->validate([
+            'lesson_id' => 'required'
+        ]);
+        $lesson_id = $data['lesson_id'];
+        $lesson = Lesson::findOrFail($lesson_id);
+        $qr = Qr::create([
+            'lesson_id' => $lesson_id,
+        ]);
+        $response = [
+            'qr' => $qr->id
+        ];
+//        QrCode::size(400)->generate('https://127.0.0.1:8000/attendance/' . $lesson->id . '/' . $qr->id . '/');
+        return \response($response);
     }
 
     /**
@@ -99,13 +109,18 @@ class QrController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateQrRequest $request
+     * @return Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
      */
-    public function update(UpdateQrRequest $request, int $qr_id)
+    public function update(UpdateQrRequest $request)
     {
+        $data = $request->validate([
+            'qr_id' => 'required'
+        ]);
+        $qr_id = $data['qr_id'];
         $qr = Qr::findOrFail($qr_id);
         $qr->qr_status_id = 3;
         $qr->save();
-        return redirect()->back();
+        return \response([]);
     }
 
     /**
