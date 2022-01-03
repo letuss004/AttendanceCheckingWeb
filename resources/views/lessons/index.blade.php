@@ -35,13 +35,13 @@
                         <td>{{$lesson->created_at}}</td>
                         <td>{{count($lesson->attendances)}}/{{$student_count}}</td>
                         <td>
-                            <button id="e{{$loop->iteration}}" class="text-decoration-none link-warning"
+                            <a id="e{{$loop->iteration}}" class="text-decoration-none link-warning"
                                     data-bs-toggle="modal" data-bs-target="#edit_class_modal">
                                 Edit
-                            </button>
-                            <button id="d{{$loop->iteration}}" class="text-decoration-none link-danger">
+                            </a>
+                            <a id="d{{$loop->iteration}}" class="text-decoration-none link-danger">
                                 Delete
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
