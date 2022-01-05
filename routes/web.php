@@ -39,7 +39,7 @@ Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesso
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::post('/courses/attendances/{course_id}', [CourseController::class, 'index'])->name('course.attendance');
+Route::get('/courses/attendances/{course_id}', [CourseController::class, 'index'])->name('course.attendance');
 
 
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');

@@ -7,7 +7,7 @@
                 <div class="my-2">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new_class_modal">New lesson
                     </button>
-                    <a class="btn btn-primary">Full</a>
+                    <a class="btn btn-primary" href="/courses/attendances/{{$course->id}}">Full</a>
                 </div>
                 <div class="my-2 search ">
                     <input type="text" class="form-control" placeholder="Search">

@@ -37,6 +37,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static Builder|Lesson whereName($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Qr[] $qrs
  * @property-read int|null $qrs_count
+ * @property-read \App\Models\Course $course
  */
 class Lesson extends Model
 {

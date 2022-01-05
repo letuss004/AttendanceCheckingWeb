@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -17,7 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string|null $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Attendance|null $attendance
  * @property-read \App\Models\Lesson $lesson
  * @method static \Database\Factories\QrFactory factory(...$parameters)
  * @method static Builder|Qr newModelQuery()
@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static Builder|Qr whereQrStatusId($value)
  * @method static Builder|Qr whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attendance[] $attendances
+ * @property-read int|null $attendances_count
  */
 class Qr extends Model
 {
@@ -38,9 +40,9 @@ class Qr extends Model
     protected $guarded = [];
     public $timestamps = true;
 
-    public function attendance(): HasOne
+    public function attendances(): HasMany
     {
-        return $this->hasOne(Attendance::class, 'qr_id', 'id');
+        return $this->hasMany(Attendance::class, 'qr_id', 'id');
     }
 
     public function lesson(): BelongsTo
