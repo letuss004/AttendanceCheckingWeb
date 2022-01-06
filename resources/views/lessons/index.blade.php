@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($course->lessons as $lesson)
+                @foreach($lessons as $lesson)
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td id="id{{$loop->iteration}}">{{$lesson->id}}</td>
@@ -36,7 +36,7 @@
                             </a>
                         </td>
                         <td>{{$lesson->created_at}}</td>
-                        <td>{{count($lesson->attendances)}}/{{$student_count}}</td>
+                        <td>{{$lesson->count}}/{{count($students)}}</td>
                         <td>
                             <a id="e{{$loop->iteration}}" class="text-decoration-none link-warning"
                                data-bs-toggle="modal" data-bs-target="#edit_class_modal">
@@ -101,8 +101,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="new_class_name" class="form-label">Lesson name</label>
-                    <input class="form-control" id="new_class_name">
+                    <label for="new_class_name" class="form-label">{{ __('Lesson name') }}</label>
+                    <input class="form-control" id="new_class_name" name="new_class_name">
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

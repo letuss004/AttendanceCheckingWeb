@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="container pe-auto">
-    <div class="row justify-content-center m-0">
+    <div class="row justify-content-center ">
         <table class="table table-striped table-bordered table-responsive-xxl text-center">
             <thead class="table-dark">
             <tr>

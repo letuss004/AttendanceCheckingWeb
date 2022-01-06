@@ -50,12 +50,12 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
-{{--                    <li class="nav-item dropdown">--}}
-{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
-{{--                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-                    <!-- Authentication Links -->
+                {{--                    <li class="nav-item dropdown">--}}
+                {{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
+                {{--                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -96,6 +96,10 @@
 
     <main class="py-4">
         @yield('content')
+    </main>
+
+    <main class="py-4">
+        @yield('atten')
     </main>
 </div>
 </body>

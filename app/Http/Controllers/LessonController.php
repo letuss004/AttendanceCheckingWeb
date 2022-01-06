@@ -12,6 +12,7 @@ use App\Models\Qr;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
@@ -34,14 +35,27 @@ class LessonController extends Controller
      */
     public function index(int $course_id)
     {
+        $tmp = false;
         $course = Course::findOrFail($course_id);
         $students = $course->students;
+        $lessons = $course->lessons;
         $users = [];
-        foreach ($students as $student) {
-            array_push($users, (new User)->findOrFail($student->id));
+        foreach ($lessons as $lesson) {
+            $count = 0;
+            foreach ($students as $student) {
+                $user = User::findOrFail($student->id);
+                if ($this->attendanceCondition($user, $lesson) == 1) {
+                    $count++;
+                }
+                if (!$tmp) {
+                    array_push($users, $user);
+                }
+            }
+            $tmp = true;
+            $lesson->setAttribute('count', $count);
         }
-        $student_count = count($students);
-        return view('lessons/index', compact('course', 'student_count', 'students', 'users'));
+
+        return view('lessons/index', compact('course', "lessons", 'students', 'users'));
     }
 
     /**
@@ -58,7 +72,7 @@ class LessonController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreLessonRequest $request
-     * @return string
+     * @return Application|ResponseFactory|Response
      */
     public function store(StoreLessonRequest $request)
     {
