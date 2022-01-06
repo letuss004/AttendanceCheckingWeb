@@ -29,9 +29,6 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/attendance/test', [AttendanceController::class, 'create']);
-
-
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
 Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
@@ -39,14 +36,16 @@ Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesso
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::get('/courses/attendances/{course_id}', [CourseController::class, 'index'])->name('course.attendance');
+Route::get('/attendance/test', [AttendanceController::class, 'create']);
+Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
+Route::get('/attendances/lesson/{lesson_id}', [AttendanceController::class, 'show'])->name('course.show');
 
 
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');
 Route::post('/qr/close/', [QrController::class, 'update'])->name('qr.close');
 
 
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.courses.store');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.atten.store');
 
 
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');

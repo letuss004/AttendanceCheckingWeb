@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
+use App\Models\Course;
+use App\Models\Lesson;
 use App\Models\Qr;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use \App\Models\Image;
@@ -23,11 +27,43 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(int $course_id)
     {
-        //
+        $course = Course::findOrFail($course_id);
+        $users = [];
+        $students = $course->students;
+        $lessons = $course->lessons;
+        foreach ($students as $student) {
+            $user = User::findOrFail($student->id);
+            $attendanceStatus = [];
+            foreach ($lessons as $lesson) {
+                $status = $this->attendanceCondition($user, $lesson);
+                array_push($attendanceStatus, $status);
+            }
+            array_push($users, $user->setAttribute('status', $attendanceStatus));
+        }
+        return view('atten/attendances', compact('users', 'lessons'));
+    }
+
+    /**
+     * @param User $user
+     * @param Lesson $lesson
+     * @return int 0 = abs || 1 = attendance
+     */
+    private function attendanceCondition(User $user, Lesson $lesson): int
+    {
+        $result = 1;
+        if (count($lesson->qrs) > 0) {
+            foreach ($lesson->qrs as $qr) {
+                if (!$qr->attendances->contains('student_id', '=', $user->id)) {
+                    $result = 0;
+                    break;
+                }
+            }
+        }
+        return $result;
     }
 
     /**

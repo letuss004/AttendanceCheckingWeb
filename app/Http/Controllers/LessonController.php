@@ -83,15 +83,26 @@ class LessonController extends Controller
         $students = $lesson->course->students;
         $users = [];
         foreach ($students as $student) {
-            $user = (new User)->findOrFail($student->id);
-            if ($student->attendances->where('lesson_id', '=', $lesson_id)->count() > 0) {
-                $user->setAttribute('status', 1);
-            } else {
-                $user->setAttribute('status', 0);
-            }
+            $user = User::findOrFail($student->id);
+            $status = $this->attendanceCondition($user, $lesson);
+            $user->setAttribute('status', $status);
             array_push($users, $user);
         }
         return view('lessons/show', compact('lesson', 'users'));
+    }
+
+    private function attendanceCondition(User $user, Lesson $lesson): int
+    {
+        $result = 1;
+        if (count($lesson->qrs) > 0) {
+            foreach ($lesson->qrs as $qr) {
+                if (!$qr->attendances->contains('student_id', '=', $user->id)) {
+                    $result = 0;
+                    break;
+                }
+            }
+        }
+        return $result;
     }
 
     /**

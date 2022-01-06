@@ -8,9 +8,7 @@
                     <button id="qr_scan" type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">QR Scan
                     </button>
-
                 </div>
-
                 <label class="my-2 search">
                     <input type="text" class="form-control" placeholder="Search">
                 </label>
@@ -23,7 +21,10 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Dep</th>
-                    <th>Status</th>
+                    @foreach($lesson->qrs as $qr)
+                        <th >{{$loop->iteration}}</th>
+                    @endforeach
+                    <th class="text-center">Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,14 +35,32 @@
                         <td>{{$student->name}}</td>
                         <td>{{$student->email}}</td>
                         <td>{{$student->department->department}}</td>
-                        <td>{{$student->status}}</td>
+                        @foreach($lesson->qrs as $qr)
+                            @if($qr->attendances->contains('student_id', '=', $student->id))
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-check2 text-success" viewBox="0 0 16 16">
+                                        <path
+                                            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                </td>
+                            @else
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" class="bi bi-x-lg text-danger" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </td>
+                            @endif
+                        @endforeach
+                        <td class="text-center">{{$student->status}}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            <div class="col-md-8">
-
-            </div>
         </div>
     </div>
 

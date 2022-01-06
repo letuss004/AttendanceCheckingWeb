@@ -19,45 +19,13 @@ class CourseController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(int $course_id)
+    public function index()
     {
-        $course = Course::findOrFail($course_id);
-        $users = [];
-        $students = $course->students;
-        $lessons = $course->lessons;
-        foreach ($students as $student) {
-            $user = User::findOrFail($student->id);
-            $attendanceStatus = [];
-            foreach ($lessons as $lesson) {
-                $status = $this->attendanceCondition($user, $lesson);
-                array_push($attendanceStatus, $status);
-            }
-            array_push($users, $user->setAttribute('status', $attendanceStatus));
-//            dd($user, $user->status);
-        }
-
-        return view('courses/attendances', compact('users', 'lessons'));
+        //
     }
 
 
-    /**
-     * @param User $user
-     * @param Lesson $lesson
-     * @return int 0 = abs || 1 = attendance
-     */
-    private function attendanceCondition(User $user, Lesson $lesson): int
-    {
-        $result = 1;
-        if (count($lesson->qrs) > 0) {
-            foreach ($lesson->qrs as $qr) {
-                if (!$qr->attendances->contains('student_id', '=', $user->id)) {
-                    $result = 0;
-                    break;
-                }
-            }
-        }
-        return $result;
-    }
+
 
     /**
      * Show the form for creating a new resource.
