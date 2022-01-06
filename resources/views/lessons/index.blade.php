@@ -90,7 +90,8 @@
             </div>
         </div>
     </div>
-    <!-- Create Class Modal -->
+
+
     <!-- Create Class Modal -->
     <div class="modal fade" id="new_class_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">

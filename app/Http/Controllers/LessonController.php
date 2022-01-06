@@ -138,7 +138,7 @@ class LessonController extends Controller
      * @param \App\Models\Lesson $lesson
      * @return Response
      */
-    public function update(UpdateLessonRequest $request, Lesson $lesson)
+    public function update(UpdateLessonRequest $request, Lesson $lesson): Response
     {
         $data = $request->validate([
             'name' => 'required',

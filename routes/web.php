@@ -38,7 +38,7 @@ Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('les
 
 Route::get('/attendance/test', [AttendanceController::class, 'create']);
 Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
-Route::get('/attendances/lesson/{lesson_id}', [AttendanceController::class, 'show'])->name('course.show');
+Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 'show'])->name('course.show');
 
 
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');

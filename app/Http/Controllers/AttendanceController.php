@@ -161,18 +161,18 @@ class AttendanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Attendance $attendance
-     * @return Response
+     * @param Attendance $attendance
+     * @return Application|Factory|View
      */
     public function show(Attendance $attendance)
     {
-        //
+        return \view('atten/show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Attendance $attendance
+     * @param Attendance $attendance
      * @return Response
      */
     public function edit(Attendance $attendance)
@@ -184,7 +184,7 @@ class AttendanceController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\UpdateAttendanceRequest $request
-     * @param \App\Models\Attendance $attendance
+     * @param Attendance $attendance
      * @return Response
      */
     public function update(UpdateAttendanceRequest $request, Attendance $attendance)
@@ -195,7 +195,7 @@ class AttendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Attendance $attendance
+     * @param Attendance $attendance
      * @return Response
      */
     public function destroy(Attendance $attendance)
