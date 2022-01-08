@@ -83,6 +83,9 @@
                 <div class="modal-body">
                     <label id="qr_name_label" for="qr_name" class="form-label">QR name</label>
                     <input class="form-control" id="qr_name">
+                    <span id="invalid_feedback" class="invalid-feedback" role="alert">
+                        <strong id="invalid_message">asfasf</strong>
+                    </span>
                     {{--  --}}
                     <select id="qr_list" class="form-select d-none" aria-label=".form-select example">
                         <option selected>Choose QR here</option>
@@ -192,6 +195,10 @@
             });
         }
 
+        function setError() {
+
+        }
+
         jQuery(document).ready(function () {
             let qr_id;
             let qr_option
@@ -212,11 +219,17 @@
                         method: 'post',
                         data: {
                             'lesson_id': {{$lesson->id}},
+                            'name': document.getElementById('qr_name').value,
                         },
                         success: function (result) {
                             qr_id = result["qr"]
                             const content = 'https://127.0.0.1:8000/attendance/' + {{$lesson->id}} + '/' + qr_id;
                             generateQRCode(content);
+                        }, error: function (jqXHR) {
+                            const {responseJSON} = jqXHR
+                            const {message} = responseJSON
+                            // $('#invalid_message').innerText = message
+                            // $('#invalid_feedback').addClass('is-invalid')
                         }
                     });
                 } else if (qr_option == 2) {

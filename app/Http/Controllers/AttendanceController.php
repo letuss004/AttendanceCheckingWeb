@@ -161,12 +161,13 @@ class AttendanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Attendance $attendance
      * @return Application|Factory|View
      */
-    public function show(Attendance $attendance)
+    public function show(int $attendance_id)
     {
-        return \view('atten/show');
+        $attendance = Attendance::find($attendance_id);
+        $images = $attendance->images;
+        return \view('atten/show', compact('attendance', 'images'));
     }
 
     /**

@@ -40,27 +40,29 @@ class QrController extends Controller
     public function create(): Response
     {
         $data = request()->validate([
-            'lesson_id' => 'required'
+            'lesson_id' => 'required',
+            'name' => 'required'
         ]);
-        $lesson_id = $data['lesson_id'];
-        $lesson = Lesson::findOrFail($lesson_id);
         $qr = Qr::create([
-            'lesson_id' => $lesson_id,
+            'lesson_id' => $data['lesson_id'],
+            'name' => $data['name'],
         ]);
         $response = [
             'qr' => $qr->id
         ];
-//        QrCode::size(400)->generate('https://127.0.0.1:8000/attendance/' . $lesson->id . '/' . $qr->id . '/');
         return \response($response);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\StoreQrRequest $request
+     * @param StoreQrRequest $request
      * @return string
      */
-    public function store(StoreQrRequest $request, int $student_id, int $lesson_id, int $qr_id)
+    public function store(StoreQrRequest $request,
+                          int            $student_id,
+                          int            $lesson_id,
+                          int            $qr_id): string
     {
         $request->validate([
             // do st here
@@ -123,8 +125,7 @@ class QrController extends Controller
         $qr_id = $data['qr_id'];
         $qr = Qr::findOrFail($qr_id);
         $qr->qr_status_id = 3;
-        $qr->save();
-        return \response([]);
+        return \response($qr->save());
     }
 
     /**
