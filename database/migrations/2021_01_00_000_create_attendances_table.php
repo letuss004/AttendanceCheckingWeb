@@ -21,20 +21,20 @@ class CreateAttendancesTable extends Migration
             $table->string('student_id');
             $table->timestamps();
             $table->foreign('attendance_status_id')->references('id')->on('attendance_statuses');
-            $table->foreign('lesson_id')->references('lesson_id')->on('qrs');
+            $table->foreign('lesson_id')->references('id')->on('lessons');
             $table->foreign('student_id')->references('id')->on('students');
             $table->foreign('qr_id')->references('id')->on('qrs');
         });
         $values = [
             [
                 'attendance_status_id' => 1,
-                'qr_id'=> 1,
+                'qr_id' => 1,
                 'lesson_id' => 1,
                 'student_id' => 'BA9067'
             ],
             [
                 'attendance_status_id' => 1,
-                'qr_id'=> 2,
+                'qr_id' => 2,
                 'lesson_id' => 1,
                 'student_id' => 'BA9067'
             ],

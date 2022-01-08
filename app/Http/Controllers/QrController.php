@@ -8,6 +8,7 @@ use App\Models\Qr;
 use App\Http\Requests\StoreQrRequest;
 use App\Http\Requests\UpdateQrRequest;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
@@ -112,7 +113,7 @@ class QrController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateQrRequest $request
-     * @return Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @return Application|ResponseFactory|Response
      */
     public function update(UpdateQrRequest $request)
     {
@@ -132,14 +133,13 @@ class QrController extends Controller
      * @param Qr $qr
      * @return Response
      */
-    public function destroy(Qr $qr)
+    public function destroy(Qr $qr): Response
     {
         $data = request()->validate([
             'qr_id' => 'required',
             'lesson_id' => 'required'
         ]);
         $qr = Qr::findOrFail($data['qr_id']);
-        $qr->attendances()->delete();
-        return \response($qr->forceDelete());
+        return \response($qr->delete());
     }
 }

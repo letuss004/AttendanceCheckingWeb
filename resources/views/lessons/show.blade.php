@@ -248,6 +248,7 @@
                     });
                 }
             });
+
             //   2nd
             jQuery('#qr_close').click(function (e) {
                 e.preventDefault();
