@@ -115,6 +115,9 @@ class AttendanceController extends Controller
         $qr = Qr::findOrFail($data['qr_id']);
         $status = $qr->qr_status_id;
         $user = User::findOrFail(auth()->user()->getAuthIdentifier());
+        if ($qr->attendances->contains('student_id', '=', $user->id)) {
+            return response(['message' => 'Student already attendance'], 403);
+        }
 
         $b1Path = request()->file('b1')->store('uploads', 'public');
         $b2Path = request()->file('b2')->store('uploads', 'public');
@@ -122,7 +125,9 @@ class AttendanceController extends Controller
         $f1Path = request()->file('f1')->store('uploads', 'public');
         $f2Path = request()->file('f2')->store('uploads', 'public');
 
+
         if ($status == 1) {
+
             $attendance = Attendance::create([
                 'attendance_status_id' => 1,
                 'qr_id' => $data['qr_id'],
@@ -149,13 +154,13 @@ class AttendanceController extends Controller
                 'attendance_id' => $attendance->id,
                 'path' => $f2Path,
             ]);
-            return response(['message' => 'success']);
+            return response(['message' => 'success'], 201);
         } elseif ($status == 2) {
-            return response(['message' => 'this code is on paused']);
+            return response(['message' => 'this code is on paused'], 403);
         } elseif ($status == 3) {
-            return response(['message' => 'this code is stopped']);
+            return response(['message' => 'this code is stopped'], 430);
         }
-        return response(['message' => 'fail']);
+        return response(['message' => 'fail'], 430);
     }
 
     /**
