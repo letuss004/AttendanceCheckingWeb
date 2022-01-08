@@ -5,8 +5,8 @@
             <h2 class="p-0 text-center">{{$lesson->name}}</h2>
             <div class="d-flex justify-content-between p-0">
                 <div class="my-2">
-                    <button id="qr_scan" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">QR Scan
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#createQrModal">QR Scan
                     </button>
                 </div>
                 <label class="my-2 search">
@@ -68,6 +68,41 @@
 
 
     <!-- Modal -->
+    <div class="modal fade" id="createQrModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="createQrModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createQrModalLabel">Options</h5>
+                    <select id="qr_select" class="form-select w-25" aria-label=".form-select example">
+                        <option selected value="1">Create</option>
+                        <option value="2">Resume</option>
+                        <option value="3">Delete</option>
+                    </select>
+                </div>
+                <div class="modal-body">
+                    <label id="qr_name_label" for="qr_name" class="form-label">QR name</label>
+                    <input class="form-control" id="qr_name">
+                    {{--  --}}
+                    <select id="qr_list" class="form-select d-none" aria-label=".form-select example">
+                        <option selected>Choose QR here</option>
+                        @foreach($lesson->qrs as $qr)
+                            <option value="{{$qr->id}}">{{$qr->id}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button id='first_modal_close' type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button id="qr_perform" class="btn btn-primary" data-bs-target="#staticBackdrop"
+                            data-bs-toggle="modal" data-bs-dismiss="modal">
+                        Perform
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -93,7 +128,7 @@
          tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header ">
                     <h5 class="modal-title" id="exampleModalToggleLabel2">Close QR</h5>
                 </div>
                 <div class="modal-body">
@@ -115,13 +150,41 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
+        jQuery(document).ready(function () {
+                $('#qr_select').on('change', function () {
+                        let val = this.value
+                        if (val == 1) {
+                            $('#qr_name').removeClass('d-none');
+                            $('#qr_name_label').removeClass('d-none');
+                            $('#qr_list').addClass('d-none');
+
+                            $('#qr_perform').attr('data-bs-target', "#staticBackdrop")
+                                .attr('data-bs-toggle', 'modal')
+                                .attr('data-bs-dismiss', 'modal')
+                        } else if (val == 2) {
+                            $('#qr_name').addClass('d-none');
+                            $('#qr_name_label').addClass('d-none');
+                            $('#qr_list').removeClass('d-none');
+                        } else if (val == 3) {
+                            $('#qr_name').addClass('d-none');
+                            $('#qr_name_label').addClass('d-none');
+                            $('#qr_list').removeClass('d-none');
+
+                            $('#qr_perform').removeAttr('data-bs-target')
+                                .removeAttr('data-bs-toggle')
+                                .removeAttr('data-bs-dismiss')
+                        }
+                    }
+                )
+            }
+        )
+
         function generateQRCode(qrtext) {
             let qr = new QRious(
                 {
                     element: document.getElementById('qr-code'),
                 }
             );
-
             qr.set({
                 foreground: 'black',
                 size: 400,
@@ -131,25 +194,59 @@
 
         jQuery(document).ready(function () {
             let qr_id;
-            jQuery('#qr_scan').click(function (e) {
+            let qr_option
+            jQuery('#qr_perform').click(function (e) {
                 e.preventDefault();
+
+                qr_id = $('#qr_list').val();
+                qr_option = $('#qr_select').val();
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                jQuery.ajax({
-                    url: "{{ url('/qr/generate/') }}",
-                    method: 'post',
-                    data: {
-                        'lesson_id': {{$lesson->id}}
-                    },
-                    success: function (result) {
-                        qr_id = result["qr"]
-                        const content = 'https://127.0.0.1:8000/attendance/' + {{$lesson->id}} + '/' + qr_id;
-                        generateQRCode(content);
-                    }
-                });
+                // logic
+                if (qr_option == 1) {
+                    jQuery.ajax({
+                        url: "{{ url('/qr/generate/') }}",
+                        method: 'post',
+                        data: {
+                            'lesson_id': {{$lesson->id}},
+                        },
+                        success: function (result) {
+                            qr_id = result["qr"]
+                            const content = 'https://127.0.0.1:8000/attendance/' + {{$lesson->id}} + '/' + qr_id;
+                            generateQRCode(content);
+                        }
+                    });
+                } else if (qr_option == 2) {
+                    jQuery.ajax({
+                        url: "{{ url('/qr/edit/') }}",
+                        method: 'post',
+                        data: {
+                            'lesson_id': {{$lesson->id}},
+                            'qr_id': qr_id,
+                        },
+                        success: function (result) {
+                            console.log(result)
+                            const content = 'https://127.0.0.1:8000/attendance/' + {{$lesson->id}} + '/' + qr_id;
+                            generateQRCode(content);
+                        }
+                    });
+                } else if (qr_option == 3) {
+                    jQuery.ajax({
+                        url: "{{ url('/qr/destroy/') }}",
+                        method: 'post',
+                        data: {
+                            'lesson_id': {{$lesson->id}},
+                            'qr_id': qr_id,
+                        },
+                        success: function (result) {
+                            location.reload();
+                            console.log(result)
+                        }
+                    });
+                }
             });
             //   2nd
             jQuery('#qr_close').click(function (e) {
@@ -167,9 +264,12 @@
                     },
                     success: function (result) {
                         console.log(result)
+                        location.reload();
                     }
                 });
             });
+            //
+
         })
     </script>
 @endsection

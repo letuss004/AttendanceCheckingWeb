@@ -96,13 +96,16 @@ class QrController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $qr_id
      * @return Response
      */
-    public function edit(int $qr_id): Response
+    public function edit(): Response
     {
-        //
-        return \response();
+        $data = request()->validate([
+            'qr_id' => 'required'
+        ]);
+        $qr = Qr::findOrFail($data['qr_id']);
+        $qr->qr_status_id = 1;
+        return \response($qr->save());
     }
 
     /**
@@ -131,6 +134,12 @@ class QrController extends Controller
      */
     public function destroy(Qr $qr)
     {
-        //
+        $data = request()->validate([
+            'qr_id' => 'required',
+            'lesson_id' => 'required'
+        ]);
+        $qr = Qr::findOrFail($data['qr_id']);
+        $qr->attendances()->delete();
+        return \response($qr->forceDelete());
     }
 }

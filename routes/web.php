@@ -43,6 +43,8 @@ Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 's
 
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');
 Route::post('/qr/close/', [QrController::class, 'update'])->name('qr.close');
+Route::post('/qr/edit/', [QrController::class, 'edit'])->name('qr.edit');
+Route::post('/qr/destroy/', [QrController::class, 'destroy'])->name('qr.destroy');
 
 
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.atten.store');
