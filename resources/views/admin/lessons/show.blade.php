@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <h2 class="text-center">{{$lesson->name}}</h2>
-            <div class="d-flex justify-content-between">
+        <div class="row justify-content-center mx-5">
+            <h2 class="text-center pb-md-5">{{$lesson->name}}</h2>
+            <div class="d-flex justify-content-between p-0">
                 <div class="my-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#createQrModal">QR Scan
@@ -286,4 +286,5 @@
 
         })
     </script>
+
 @endsection

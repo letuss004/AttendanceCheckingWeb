@@ -46,7 +46,9 @@ Route::post('/qr/edit/', [QrController::class, 'edit'])->name('qr.edit');
 Route::post('/qr/destroy/', [QrController::class, 'destroy'])->name('qr.destroy');
 
 
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.atten.store');
+Route::post('/admin/lessons/{course_id}', [LessonController::class, 'index'])->name('admin.lessons.index');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
 
 
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');

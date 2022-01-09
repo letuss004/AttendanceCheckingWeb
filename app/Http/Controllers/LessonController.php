@@ -54,7 +54,9 @@ class LessonController extends Controller
             $tmp = true;
             $lesson->setAttribute('count', $count);
         }
-
+        if (User::findOrFail(auth()->user()->getAuthIdentifier())->department_id == 1) {
+            return \view('admin/lessons/index', compact('course', "lessons", 'students', 'users'));
+        }
         return view('lessons/index', compact('course', "lessons", 'students', 'users'));
     }
 
@@ -101,6 +103,9 @@ class LessonController extends Controller
             $status = $this->attendanceCondition($user, $lesson);
             $user->setAttribute('status', $status);
             array_push($users, $user);
+        }
+        if (User::findOrFail(auth()->user()->getAuthIdentifier())->department_id == 1) {
+            return view('admin/lessons/show', compact('lesson', 'users'));
         }
         return view('lessons/show', compact('lesson', 'users'));
     }
