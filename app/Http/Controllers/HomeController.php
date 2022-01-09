@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
@@ -34,7 +35,10 @@ class HomeController extends Controller
         } elseif ($user_type === 2) {
             return view('home/teacher');
         } elseif ($user_type === 3) {
-            return view('home/admin');
+            $courses = Course::all();
+            $active = $courses->where('active', '=', 1);
+            $finished = $courses->where('active', '=', 0);
+            return view('admin/index', compact('courses', 'active', 'finished'));
         }
         return view('home/home');
     }

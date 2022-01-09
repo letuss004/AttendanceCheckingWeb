@@ -36,7 +36,6 @@ Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesso
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
-Route::get('/attendance/test', [AttendanceController::class, 'create']);
 Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
 Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 'show'])->name('course.show');
 
@@ -52,6 +51,4 @@ Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->n
 
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
 Route::get('/student/test', [StudentController::class, 'index'])->name('test');
-
-
 

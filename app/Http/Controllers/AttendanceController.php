@@ -69,7 +69,8 @@ class AttendanceController extends Controller
     /**
      * Show the form for creating a new resource.
      * Request data convention: b: back, f: front, s: status
-     * @return
+     * @param Request $request
+     * @return void
      */
     public function create(Request $request)
     {
