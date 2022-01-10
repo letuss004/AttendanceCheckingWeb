@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Course;
+use App\Models\CourseList;
 use App\Models\Lesson;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -38,7 +40,16 @@ class HomeController extends Controller
             $courses = Course::all();
             $active = $courses->where('active', '=', 1);
             $finished = $courses->where('active', '=', 0);
-            return view('admin/index', compact('courses', 'active', 'finished'));
+            $lecturers = Teacher::all();
+            $coursesList = CourseList::all();
+            return view('admin/courses/index',
+                compact('courses',
+                    'active',
+                    'finished',
+                    'lecturers',
+                    'coursesList'
+                )
+            );
         }
         return view('home/home');
     }

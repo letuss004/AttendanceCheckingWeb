@@ -1,17 +1,21 @@
 @extends('layouts.sidebar')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center mx-5">
+        <div class="row justify-content-center">
             <h2 class="text-center mb-md-5">{{$course->courseList->name}} Classes</h2>
             <div class="d-flex justify-content-between">
                 <div class="my-2">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#new_class_modal">
+                    <button type="button" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#new_class_modal">
                         New lesson
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#add_student_modal">
+                        Add student
                     </button>
                     <a class="btn btn-primary" href="/attendances/course/{{$course->id}}">Full</a>
                 </div>
-                <div class="my-2 search ">
+                <div class="my-2 search">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
             </div>
@@ -66,47 +70,65 @@
                 </tbody>
             </table>
         </div>
+
+        <hr class="mt-lg-5">
+
+        {{--    new table--}}
+        <div class="row justify-content-center">
+            <h2 class="text-center mb-md-5">Student list</h2>
+            <div class="d-flex justify-content-between">
+                <div class="my-2">
+                    <button id="new_class" type="button" class="btn btn-primary d-none"></button>
+                </div>
+                <div class="my-2 search">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Dep</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $student)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$student->id}}</td>
+                        <td>{{$student->name}}</td>
+                        <td>{{$student->email}}</td>
+                        <td>{{$student->department->department}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <hr class="mt-lg-5">
-
-
-    {{--    new table--}}
-    <div class="row justify-content-center mx-5">
-        <h2 class="text-center mb-md-5">Student list</h2>
-        <div class="d-flex justify-content-between">
-            <div class="my-2">
-                <button id="new_class" type="button" class="btn btn-primary d-none"></button>
-            </div>
-            <div class="my-2 search">
-                <input type="text" class="form-control" placeholder="Search">
+    <!-- Add Student Modal -->
+    <div class="modal fade" id="add_student_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="new_class_name" class="form-label">{{ __('Lesson name') }}</label>
+                    <input class="form-control" id="new_class_name" name="new_class_name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="create" type="button" class="btn btn-primary">Create</button>
+                </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>No</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Dep</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($users as $student)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$student->id}}</td>
-                    <td>{{$student->name}}</td>
-                    <td>{{$student->email}}</td>
-                    <td>{{$student->department->department}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
     </div>
-
-
     <!-- Create Class Modal -->
     <div class="modal fade" id="new_class_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -119,11 +141,6 @@
                 <div class="modal-body">
                     <label for="new_class_name" class="form-label">{{ __('Lesson name') }}</label>
                     <input class="form-control" id="new_class_name" name="new_class_name">
-                    @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -174,6 +191,9 @@
             </div>
         </div>
     </div>
+
+
+
     {{--  Script  --}}
     <script>
         jQuery(document).ready(function () {

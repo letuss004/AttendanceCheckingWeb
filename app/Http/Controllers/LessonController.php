@@ -82,11 +82,12 @@ class LessonController extends Controller
             'name' => ['required'],
             'course_id' => ['required'],
         ]);
-        Lesson::create([
-            'name' => $data['name'],
-            'course_id' => $data['course_id'],
-        ]);
-        return \response([]);
+        return \response(
+            Lesson::create([
+                'name' => $data['name'],
+                'course_id' => $data['course_id'],
+            ])
+        );
     }
 
     /**
@@ -128,9 +129,9 @@ class LessonController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return Application|Factory|View
+     * @return Application
      */
-    public function edit(int $id)
+    public function edit(int $id): Application
     {
 
         return \response(request());
@@ -139,8 +140,8 @@ class LessonController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateLessonRequest $request
-     * @param \App\Models\Lesson $lesson
+     * @param UpdateLessonRequest $request
+     * @param Lesson $lesson
      * @return Response
      */
     public function update(UpdateLessonRequest $request, Lesson $lesson): Response
@@ -151,14 +152,13 @@ class LessonController extends Controller
         ]);
         $lesson = Lesson::findOrFail($data['lesson_id']);
         $lesson->name = $data['name'];
-        $lesson->save();
-        return \response([]);
+        return \response($lesson->save());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Lesson $lesson
+     * @param Lesson $lesson
      * @return Response
      */
     public function destroy(Lesson $lesson): Response
@@ -167,7 +167,6 @@ class LessonController extends Controller
             'lesson_id' => 'required',
         ]);
         $lesson = Lesson::findOrFail($data['lesson_id']);
-        $lesson->delete();
-        return \response([]);
+        return \response($lesson->delete());
     }
 }

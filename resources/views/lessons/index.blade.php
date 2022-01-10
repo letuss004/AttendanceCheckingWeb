@@ -104,11 +104,6 @@
                 <div class="modal-body">
                     <label for="new_class_name" class="form-label">{{ __('Lesson name') }}</label>
                     <input class="form-control" id="new_class_name" name="new_class_name">
-                    @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

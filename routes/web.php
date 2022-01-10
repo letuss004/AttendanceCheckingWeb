@@ -29,6 +29,11 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+Route::post('/course/create', [CourseController::class, 'store'])->name('course.store');
+Route::post('/course/edit/', [CourseController::class, 'edit'])->name('course.update');
+Route::post('/course/destroy/', [CourseController::class, 'destroy'])->name('course.destroy');
+
+
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
 Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
