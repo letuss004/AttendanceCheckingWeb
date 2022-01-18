@@ -109,6 +109,7 @@
         </div>
     </div>
 
+
     <!-- Add Student Modal -->
     <div class="modal fade" id="add_student_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -116,15 +117,26 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add student</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <select id="add_student_select" class="form-select w-25" aria-label=".form-select example">
+                        <option value="1" selected>Excel</option>
+                        <option value="2">Json</option>
+                        <option value="3">Single</option>
+                    </select>
                 </div>
                 <div class="modal-body">
-                    <label for="new_class_name" class="form-label">{{ __('Lesson name') }}</label>
-                    <input class="form-control" id="new_class_name" name="new_class_name">
+                    <div id="input_file_div" class="my-3 w-75">
+                        <form id="data" method="post" enctype="multipart/form-data">
+                            <input id="input_file" class="form-control" type="file">
+                        </form>
+                    </div>
+                    <div id="student_input_div" class="mb-3 w-75 d-none">
+                        <label for="student_input" class="form-label">Input students</label>
+                        <input id="student_input" class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="create" type="button" class="btn btn-primary">Create</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id='add_student_button' class="btn btn-primary">Create</button>
                 </div>
             </div>
         </div>
@@ -198,20 +210,35 @@
     <script>
         jQuery(document).ready(function () {
             @foreach($course->lessons as $lesson)
-            jQuery('#e{{$loop->iteration}}').click(function (e) {
+            $('#e{{$loop->iteration}}').click(function (e) {
                 e.preventDefault();
                 document.getElementById("edit_class_name").value =
                     document.getElementById('n' + {{$loop->iteration}}).innerText;
                 document.getElementById("lesson_id").value =
                     document.getElementById('id' + {{$loop->iteration}}).innerText;
             });
-            jQuery('#d{{$loop->iteration}}').click(function (e) {
+            $('#d{{$loop->iteration}}').click(function (e) {
                 e.preventDefault();
                 document.getElementById("lesson_id").value =
                     document.getElementById('id' + {{$loop->iteration}}).innerText;
             });
             @endforeach
 
+            // add student model option onclick
+            $('#add_student_select').on('change', function () {
+                    let val = this.value
+                    if (val == 1) {
+                        $('#input_file_div').removeClass('d-none');
+                        $('#student_input_div').addClass('d-none');
+                    } else if (val == 2) {
+                        $('#input_file_div').addClass('d-none');
+                        $('#student_input_div').removeClass('d-none');
+                    } else if (val == 3) {
+                        $('#input_file_div').addClass('d-none');
+                        $('#student_input_div').removeClass('d-none');
+                    }
+                }
+            )
             // create lesson
             jQuery('#create').click(function (e) {
                 e.preventDefault();
@@ -268,6 +295,37 @@
                     method: 'post',
                     data: {
                         'lesson_id': document.getElementById("lesson_id").value,
+                    },
+                    success: function (result) {
+                        console.log(result)
+                        location.reload();
+                    }
+                });
+            });
+            // add student input
+            var file;
+            $(function () {
+                $('#input_file').change(function (e) {
+                    file = e.target.files[0];
+                    console.log(file);
+                })
+            })
+            jQuery('#add_student_button').click(function (e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ url('/course/add/student') }}",
+                    method: 'post',
+                    data: {
+                        'option': document.getElementById("add_student_select").value,
+                        'course_id': "{{$course->id}}",
+                        'student_id': document.getElementById("student_input").value,
+                        'json': document.getElementById("student_input").value,
+                        'xlsx': file,
                     },
                     success: function (result) {
                         console.log(result)

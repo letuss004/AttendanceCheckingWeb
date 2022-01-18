@@ -55,6 +55,12 @@ class LessonController extends Controller
             $lesson->setAttribute('count', $count);
         }
         if (User::findOrFail(auth()->user()->getAuthIdentifier())->department_id == 1) {
+            if (count($lessons) == 0) {
+                foreach ($students as $student) {
+                    $user = User::findOrFail($student->id);
+                    array_push($users, $user);
+                }
+            }
             return \view('admin/lessons/index', compact('course', "lessons", 'students', 'users'));
         }
         return view('lessons/index', compact('course', "lessons", 'students', 'users'));
@@ -106,7 +112,13 @@ class LessonController extends Controller
             array_push($users, $user);
         }
         if (User::findOrFail(auth()->user()->getAuthIdentifier())->department_id == 1) {
-            return view('admin/lessons/show', compact('lesson', 'users'));
+            $st_all = Student::all();
+            return view('admin/lessons/show',
+                compact('lesson',
+                    'users',
+                    'st_all'
+                )
+            );
         }
         return view('lessons/show', compact('lesson', 'users'));
     }

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\StudentImport;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Lesson;
 use App\Models\Qr;
-use App\Models\User;
+use App\Models\Student;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CourseController extends Controller
 {
@@ -32,9 +34,39 @@ class CourseController extends Controller
      * @return Response
      */
     public
-    function create()
+    function create(): Response
     {
-        //
+        $data = request()->validate([
+            'option' => ['required'],
+            'course_id' => ['required'],
+        ]);
+        $course = Course::findOrFail($data['course_id']);
+        if ($data['option'] == 1) {
+            $data = request()->validate([
+                'xlsx' => ['required', 'file'],
+            ]);
+            $file = request()->file('xlsx')->store('storage/upload/');
+            $store = Excel::import(new StudentImport(), $file);
+            return \response($store, 201);
+        } else if ($data['option'] == 2) {
+            $data = request()->validate([
+                'json' => ['required'],
+            ]);
+        } else if ($data['option'] == 3) {
+            $data = request()->validate([
+                'student_id' => ['required'],
+            ]);
+            $student = Student::find($data['student_id']);
+            $course->students()->attach($student);
+            return \response([]);
+        }
+        return \response(['fail'], 400);
+    }
+
+    private function postUploadCsv()
+    {
+
+
     }
 
     /**

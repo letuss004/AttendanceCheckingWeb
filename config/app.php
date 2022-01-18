@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -125,7 +125,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
+    | Autoloader Service Providers
     |--------------------------------------------------------------------------
     |
     | The service providers listed here will be automatically loaded on the
@@ -135,7 +135,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -166,10 +165,6 @@ return [
         // qr
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
-         * Package Service Providers...
-         */
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -178,6 +173,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -234,6 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Input' => Illuminate\Support\Facades\Request::class,
+
     ],
 
 ];

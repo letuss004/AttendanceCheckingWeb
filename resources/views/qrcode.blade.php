@@ -8,7 +8,6 @@
             </div>
 
 
-
             <div class="card-body">
                 <a href="{{'/attendance/' . $lesson->id . '/' . $qr->id . '/'. 'BA9044'}}">
                     {{'https://127.0.0.1:8000/attendance/' . $lesson->id . '/' . $qr->id . '/BA9044'}}
