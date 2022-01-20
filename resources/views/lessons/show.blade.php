@@ -223,7 +223,7 @@
                         },
                         success: function (result) {
                             qr_id = result["qr"]
-                            const content = 'https://127.0.0.1:8000/attendance/' + {{$lesson->id}} + '/' + qr_id;
+                            const content = 'https://' + $('meta[name="csrf-token"]').attr('content') + '/attendance/' + {{$lesson->id}} + '/' + qr_id;
                             generateQRCode(content);
                         }, error: function (jqXHR) {
                             const {responseJSON} = jqXHR
@@ -242,7 +242,7 @@
                         },
                         success: function (result) {
                             console.log(result)
-                            const content = 'https://127.0.0.1:8000/attendance/' + {{$lesson->id}} + '/' + qr_id;
+                            const content = 'https://' + $('meta[name="csrf-token"]').attr('content') + '/attendance/' + {{$lesson->id}} + '/' + qr_id;
                             generateQRCode(content);
                         }
                     });

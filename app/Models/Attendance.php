@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 
 /**
@@ -39,7 +40,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Attendance extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $guarded = [];
     public $timestamps = true;

@@ -12,7 +12,7 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^8.65",
         "laravel/passport": "^10.2",
-        "laravel/sanctum": "^2.13",
+        "laravel/sanctum": "^2.14",
         "laravel/telescope": "^4.6",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
@@ -65,7 +65,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

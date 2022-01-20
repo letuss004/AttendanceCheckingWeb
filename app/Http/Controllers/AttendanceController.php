@@ -213,6 +213,13 @@ class AttendanceController extends Controller
     /*
      *
      */
+    /**
+     * @return Application|ResponseFactory|Response
+     */
+    public function test()
+    {
+        return \response([]);
+    }
 
     private function countAttendanceStatus(int $b1, int $b2, int $b3, int $f1, int $f2)
     {

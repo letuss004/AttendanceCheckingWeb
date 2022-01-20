@@ -15,4 +15,9 @@ class LogoutController
             'message' => 'success'
         ];
     }
+
+    public function test()
+    {
+        return response([]);
+    }
 }
