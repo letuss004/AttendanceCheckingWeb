@@ -124,11 +124,7 @@
                     </select>
                 </div>
                 <div class="modal-body">
-                    <div id="input_file_div" class="my-3 w-75">
-                        <form id="data" method="post" enctype="multipart/form-data">
-                            <input id="input_file" class="form-control" type="file">
-                        </form>
-                    </div>
+                    <input id="input_file" class="form-control" type="file">
                     <div id="student_input_div" class="mb-3 w-75 d-none">
                         <label for="student_input" class="form-label">Input students</label>
                         <input id="student_input" class="form-control">
@@ -228,14 +224,17 @@
             $('#add_student_select').on('change', function () {
                     let val = this.value
                     if (val == 1) {
-                        $('#input_file_div').removeClass('d-none');
+                        $('#input_file').removeClass('d-none');
                         $('#student_input_div').addClass('d-none');
+                        $('#option').value = 1;
                     } else if (val == 2) {
-                        $('#input_file_div').addClass('d-none');
+                        $('#input_file').addClass('d-none');
                         $('#student_input_div').removeClass('d-none');
+                        $('#option').value = 2;
                     } else if (val == 3) {
-                        $('#input_file_div').addClass('d-none');
+                        $('#input_file').addClass('d-none');
                         $('#student_input_div').removeClass('d-none');
+                        $('#option').value = 3;
                     }
                 }
             )
@@ -260,7 +259,7 @@
                     }
                 });
             });
-            // edit lesson
+            // edit lesson ==================================================================
             jQuery('#edit_confirm').click(function (e) {
                 e.preventDefault();
                 console.log(document.getElementById("edit_class_name").value, document.getElementById("lesson_id").value)
@@ -302,7 +301,7 @@
                     }
                 });
             });
-            // add student input
+            // add student input ==================================================================
             var file;
             $(function () {
                 $('#input_file').change(function (e) {
@@ -312,26 +311,34 @@
             })
             jQuery('#add_student_button').click(function (e) {
                 e.preventDefault();
+                let data = new FormData();
+                let input = $('#student_input').val();
+                data.append('option', $('#add_student_select').val())
+                data.append('course_id', '{{$course->id}}')
+                data.append('student_id', input)
+                data.append('json', input)
+                data.append('xlsx', file)
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                jQuery.ajax({
-                    url: "{{ url('/course/add/student') }}",
-                    method: 'post',
-                    data: {
-                        'option': document.getElementById("add_student_select").value,
-                        'course_id': "{{$course->id}}",
-                        'student_id': document.getElementById("student_input").value,
-                        'json': document.getElementById("student_input").value,
-                        'xlsx': file,
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "{{route('course.add.student')}}",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        console.log('sucess')
                     },
-                    success: function (result) {
-                        console.log(result)
-                        location.reload();
+                    error: function (e) {
+                        console.log('fail')
                     }
-                });
+                })
             });
         });
     </script>

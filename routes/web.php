@@ -32,14 +32,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/course/create', [CourseController::class, 'store'])->name('course.store');
 Route::post('/course/edit/', [CourseController::class, 'edit'])->name('course.update');
 Route::post('/course/destroy/', [CourseController::class, 'destroy'])->name('course.destroy');
-Route::post('/course/add/student', [CourseController::class, 'create'])->name('course.create');
+Route::post('/course/add/student', [CourseController::class, 'create'])->name('course.add.student');
 
 
+Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
+Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
 Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesson.update');
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
-Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
-Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 
 Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
 Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 'show'])->name('course.show');
