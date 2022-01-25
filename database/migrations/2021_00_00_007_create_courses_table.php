@@ -19,21 +19,29 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('course_list_id');
             $table->string('admin_id');
             $table->string('teacher_id');
+            $table->boolean('active');
             $table->timestamps();
+            $table->foreign('course_list_id')->references('id')->on('course_lists');
+            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+
         });
 
         $values = [
             [
                 'course_list_id' => 1,
                 'teacher_id' => 'ICT067',
+                'active' => true,
                 'admin_id' => 'ADM001'
             ], [
                 'course_list_id' => 4,
                 'teacher_id' => 'ICT067',
+                'active' => true,
                 'admin_id' => 'ADM001'
             ], [
                 'course_list_id' => 6,
                 'teacher_id' => 'ICT067',
+                'active' => true,
                 'admin_id' => 'ADM001'
             ]
         ];

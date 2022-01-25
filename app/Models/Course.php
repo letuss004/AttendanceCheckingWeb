@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 
@@ -21,22 +22,25 @@ use Illuminate\Support\Carbon;
  * @property int $teacher_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Models\Admin $admin
- * @property-read \App\Models\CourseList $courseList
- * @property-read \App\Models\Enrollment|null $coursesRegistration
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lesson[] $lessons
+ * @property int $active
+ * @property-read Admin $admin
+ * @property-read CourseList $courseList
+ * @property-read Collection|Lesson[] $lessons
  * @property-read int|null $lessons_count
- * @property-read \App\Models\Teacher $teacher
+ * @property-read Collection|Student[] $students
+ * @property-read int|null $students_count
+ * @property-read Teacher $teacher
  * @method static Builder|Course newModelQuery()
  * @method static Builder|Course newQuery()
  * @method static Builder|Course query()
+ * @method static Builder|Course whereActive($value)
  * @method static Builder|Course whereAdminId($value)
  * @method static Builder|Course whereCourseListId($value)
  * @method static Builder|Course whereCreatedAt($value)
  * @method static Builder|Course whereId($value)
  * @method static Builder|Course whereTeacherId($value)
  * @method static Builder|Course whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Course extends Model
 {
@@ -52,7 +56,7 @@ class Course extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class, 'course_student');
+        return $this->belongsToMany(Student::class, 'course_student');
     }
 
     public function admin(): BelongsTo
@@ -69,5 +73,4 @@ class Course extends Model
     {
         return $this->belongsTo(CourseList::class);
     }
-
 }

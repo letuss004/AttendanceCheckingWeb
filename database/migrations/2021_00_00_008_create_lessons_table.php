@@ -18,35 +18,35 @@ class CreateLessonsTable extends Migration
             $table->string('name')->nullable();
             $table->unsignedBigInteger('course_id')->index();
             $table->string('teacher_id')->index()->nullable();
-            $table->timestamps(1);
+            $table->timestamps();
             $table->foreign('course_id')->references('id')->on('courses');
-
+            $table->foreign('teacher_id')->references('id')->on('teachers');
         });
 
         $values = [
             [
                 'course_id' => 1,
-                'name'=>'Introduction',
+                'name' => 'Introduction',
                 'teacher_id' => 'ICT067'],
             [
                 'course_id' => 2,
-                'name'=>'Introduction',
+                'name' => 'Introduction',
                 'teacher_id' => 'ICT067'],
             [
                 'course_id' => 3,
-                'name'=>'Introduction',
+                'name' => 'Introduction',
                 'teacher_id' => 'ICT067'],
             [
                 'course_id' => 1,
-                'name'=>'Second lecture',
+                'name' => 'Second lecture',
                 'teacher_id' => 'ICT067'],
             [
                 'course_id' => 2,
-                'name'=>'Second lecture',
+                'name' => 'Second lecture',
                 'teacher_id' => 'ICT067'],
             [
                 'course_id' => 3,
-                'name'=>'Second lecture',
+                'name' => 'Second lecture',
                 'teacher_id' => 'ICT067'],
         ];
         DB::table('lessons')->insert($values);

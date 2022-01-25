@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CoursesRegistrationController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
-use App\Models\Lesson;
-use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -29,16 +29,41 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+Route::post('/course/create', [CourseController::class, 'store'])->name('course.store');
+Route::post('/course/edit/', [CourseController::class, 'edit'])->name('course.update');
+Route::post('/course/destroy/', [CourseController::class, 'destroy'])->name('course.destroy');
+Route::post('/course/add/student', [CourseController::class, 'create'])->name('course.add.student');
+
+
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
-Route::get('/lesson/create/{course_id}', [LessonController::class, 'create'])->name('lesson.create');
+Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name('lesson.show');
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
-Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
-Route::get('/lesson/delete/{id}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesson.update');
+Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
+Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
+Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 'show'])->name('course.show');
 
 
-Route::get('/admin/register/{course_id}', [AdminController::class, 'store'])->name('admin.register.course');
-Route::get('/admin/{student_id}/register/{course_id}', [CoursesRegistrationController::class, 'store'])->name('admin.register.course.student');
+Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');
+Route::post('/qr/close/', [QrController::class, 'update'])->name('qr.close');
+Route::post('/qr/edit/', [QrController::class, 'edit'])->name('qr.edit');
+Route::post('/qr/destroy/', [QrController::class, 'destroy'])->name('qr.destroy');
 
 
-Route::get('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
+Route::post('/admin/lessons/{course_id}', [LessonController::class, 'index'])->name('admin.lessons.index');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
+Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
+
+
+Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
 Route::get('/student/test', [StudentController::class, 'index'])->name('test');
+
+
+
+
+
+
+
+
+

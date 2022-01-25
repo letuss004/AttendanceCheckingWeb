@@ -22,6 +22,9 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->timestamp('last_used_at')->nullable();
             $table->timestamps();
         });
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->string('tokenable_id')->change();
+        });
     }
 
     /**

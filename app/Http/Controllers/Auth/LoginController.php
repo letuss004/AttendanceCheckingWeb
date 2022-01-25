@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -37,4 +40,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function studentLogin(Request $request)
+    {
+        $fields = $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        // Check email
+        $user = User::where('email', $fields['email'])->first();
+
+        // Check password
+        if (!$user || !Hash::check($fields['password'], $user->password)) {
+            // new \ArrayObject() return an empty user object
+            $response = ['user' => new \ArrayObject(), 'message' => 'fail'];
+            return response($response, 401);
+        }
+
+        $token = $user->createToken('myapptoken')->plainTextToken;
+        $user->setAttribute('token', $token);
+        $response = ['user' => $user, 'message' => 'success'];
+        return response($response, 200);
+    }
+
+
 }

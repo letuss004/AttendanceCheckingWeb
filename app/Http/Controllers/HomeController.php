@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Course;
+use App\Models\CourseList;
 use App\Models\Lesson;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -33,8 +37,30 @@ class HomeController extends Controller
         } elseif ($user_type === 2) {
             return view('home/teacher');
         } elseif ($user_type === 3) {
-            return view('home/admin');
+            $courses = Course::all();
+            $active = $courses->where('active', '=', 1);
+            $finished = $courses->where('active', '=', 0);
+            $lecturers = Teacher::all();
+            $coursesList = CourseList::all();
+            return view('admin/courses/index',
+                compact('courses',
+                    'active',
+                    'finished',
+                    'lecturers',
+                    'coursesList'
+                )
+            );
         }
         return view('home/home');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return response(['message' => 'success']);
     }
 }

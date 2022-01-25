@@ -1,0 +1,22 @@
+###
+POST http://192.168.0.103:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "letuss004@gmail.com",
+    "password": "letuss004"
+}
+
+###
+POST http://192.168.0.103:8000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "letuss004",
+    "password": "LETUSS004"
+}
+
+###
+POST http://192.168.0.103:8000/api/auth/logout
+
+

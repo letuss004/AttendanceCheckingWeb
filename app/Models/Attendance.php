@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 
 /**
@@ -30,10 +32,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $qr_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereQrId($value)
+ * @property-read \App\Models\Qr $qr
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
  */
 class Attendance extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $guarded = [];
     public $timestamps = true;
@@ -51,5 +58,15 @@ class Attendance extends Model
     public function attendanceStatus(): BelongsTo
     {
         return $this->belongsTo(AttendanceStatus::class);
+    }
+
+    public function qr(): BelongsTo
+    {
+        return $this->belongsTo(Qr::class, 'qr_id', 'id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
     }
 }
