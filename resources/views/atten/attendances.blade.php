@@ -17,6 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,7 +32,7 @@
 <body>
 <div class="container pe-auto">
     <div class="row justify-content-center ">
-        <table class="table table-striped table-bordered table-responsive-xxl text-center">
+        <table id="data_table" class="table table-striped table-bordered table-responsive-xxl text-center">
             <thead class="table-dark">
             <tr>
                 <td class="align-middle">#</td>
@@ -87,15 +89,32 @@
                                 0
                             @endif
                         @else
-                          x
+                            x
                         @endif
-
                     </td>
                 </tr>
             @endforeach
+
             </tbody>
+            <tfoot>
+            <td>
+                <button id="export">Export</button>
+            </td>
+            </tfoot>
         </table>
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $('#export').click(function (e) {
+            $("#data_table").table2excel({
+                exclude: ".excludeThisClass",
+                name: "Worksheet Name",
+                filename: "attenData.xls", // do include extension
+                preserveColors: false // set to true if you want background colors and font colors preserved
+            });
+        })
+    });
+</script>
 </html>

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -103,6 +104,28 @@ class User extends Authenticatable
     public function setAccessToken(Contracts\HasAbilities $accessToken): void
     {
         $this->accessToken = $accessToken;
+    }
+
+    /**
+     * Save a new model with relationship then return the instance.
+     *
+     * @param array $attributes
+     * @return Builder|Model
+     * @static
+     */
+    public static function createWithRel(array $attributes = []): Model|Builder
+    {
+        /** @var Builder $instance */
+        $user = User::create($attributes);
+        $type = $user->user_type_id;
+        if ($type == 1) {
+            Student::create($user);
+        } else if ($type == 2) {
+            Teacher::create($user);
+        } else if ($type == 3) {
+            Admin::create($user);
+        }
+        return $user;
     }
 
     public function student(): HasOne

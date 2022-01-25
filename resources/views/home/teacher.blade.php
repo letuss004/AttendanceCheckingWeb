@@ -22,23 +22,20 @@
             <table class="table table-striped ">
                 <thead>
                 <tr>
+                    <th>No</th>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($courses as $course)
                     <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$course->id}}</td>
                         <td>
                             <a class="text-decoration-none link-dark" href="/lessons/{{$course->id}}">
                                 {{$course->courseList->name}}
                             </a>
-                        </td>
-                        <td>
-                            <a class="text-decoration-none link-secondary" href="#">Edit</a>
-                            <a class="text-decoration-none link-secondary" href="#">Delete</a>
                         </td>
                     </tr>
                 @endforeach

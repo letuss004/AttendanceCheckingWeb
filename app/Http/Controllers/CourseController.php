@@ -47,7 +47,7 @@ class CourseController extends Controller
             $data = request()->validate([
                 'xlsx' => ['required', 'file'],
             ]);
-            $file = $data['xlsx']->store('storage/excel/');
+            $file = $data['xlsx']->store('public/uploads/excels');
             $data = Excel::toCollection(new CourseStudentsImport($course), $file);
             foreach ($data[0] as $row) {
                 if (!$student_pivot->contains($row['id'])) {

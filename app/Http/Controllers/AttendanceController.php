@@ -29,7 +29,7 @@ class AttendanceController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(int $course_id)
+    public function index(int $course_id): Factory|View|Application
     {
         $course = Course::findOrFail($course_id);
         $users = [];
@@ -40,9 +40,9 @@ class AttendanceController extends Controller
             $attendanceStatus = [];
             foreach ($lessons as $lesson) {
                 $status = $this->attendanceCondition($user, $lesson);
-                array_push($attendanceStatus, $status);
+                $attendanceStatus[] = $status;
             }
-            array_push($users, $user->setAttribute('status', $attendanceStatus));
+            $users[] = $user->setAttribute('status', $attendanceStatus);
         }
         return view('atten/attendances', compact('users', 'lessons'));
     }
@@ -120,11 +120,11 @@ class AttendanceController extends Controller
             return response(['message' => 'Student already attendance'], 403);
         }
 
-        $b1Path = request()->file('b1')->store('uploads', 'public');
-        $b2Path = request()->file('b2')->store('uploads', 'public');
-        $b3Path = request()->file('b3')->store('uploads', 'public');
-        $f1Path = request()->file('f1')->store('uploads', 'public');
-        $f2Path = request()->file('f2')->store('uploads', 'public');
+        $b1Path = request()->file('b1')->store('uploads/images', 'public');
+        $b2Path = request()->file('b2')->store('uploads/images', 'public');
+        $b3Path = request()->file('b3')->store('uploads/images', 'public');
+        $f1Path = request()->file('f1')->store('uploads/images', 'public');
+        $f2Path = request()->file('f2')->store('uploads/images', 'public');
 
 
         if ($status == 1) {

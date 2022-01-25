@@ -6,6 +6,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -60,7 +62,7 @@ Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store
 Route::get('/student/test', [StudentController::class, 'index'])->name('test');
 
 
-
+Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
 
 
 

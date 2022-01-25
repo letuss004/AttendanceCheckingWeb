@@ -31,9 +31,10 @@ class LessonController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param int $course_id
      * @return Application|Factory|View
      */
-    public function index(int $course_id)
+    public function index(int $course_id): View|Factory|Application
     {
         $tmp = false;
         $course = Course::findOrFail($course_id);
@@ -48,7 +49,7 @@ class LessonController extends Controller
                     $count++;
                 }
                 if (!$tmp) {
-                    array_push($users, $user);
+                    $users[] = $user;
                 }
             }
             $tmp = true;
@@ -57,14 +58,14 @@ class LessonController extends Controller
         if (count($lessons) == 0) {
             foreach ($students as $student) {
                 $user = User::findOrFail($student->id);
-                array_push($users, $user);
+                $users[] = $user;
             }
         }
         if (user::findorfail(auth()->user()->getauthidentifier())->user_type_id == 3) {
             if (count($lessons) == 0) {
                 foreach ($students as $student) {
                     $user = User::findOrFail($student->id);
-                    array_push($users, $user);
+                    $users[] = $user;
                 }
             }
             return \view('admin/lessons/index', compact('course', "lessons", 'students', 'users'));
@@ -88,7 +89,7 @@ class LessonController extends Controller
      * @param StoreLessonRequest $request
      * @return Application|ResponseFactory|Response
      */
-    public function store(StoreLessonRequest $request)
+    public function store(StoreLessonRequest $request): Response|Application|ResponseFactory
     {
         $data = request()->validate([
             'name' => ['required'],
@@ -106,7 +107,7 @@ class LessonController extends Controller
      * Display the specified resource.
      *
      */
-    public function show(int $lesson_id)
+    public function show(int $lesson_id): Factory|View|Application
     {
         $lesson = Lesson::findOrFail($lesson_id);
         $students = $lesson->course->students;
@@ -115,7 +116,7 @@ class LessonController extends Controller
             $user = User::findOrFail($student->id);
             $status = $this->attendanceCondition($user, $lesson);
             $user->setAttribute('status', $status);
-            array_push($users, $user);
+            $users[] = $user;
         }
         if (User::findOrFail(auth()->user()->getAuthIdentifier())->department_id == 1) {
             $st_all = Student::all();
