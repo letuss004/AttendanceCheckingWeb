@@ -80,7 +80,16 @@
                         @endif
                     @endforeach
                     <td class="align-middle">
-                        {{array_count_values($student->status)[1]}}
+                        @if(count($student->status) != 0)
+                            @if(in_array(1, $student->status))
+                                {{array_count_values($student->status)[1]}}
+                            @else
+                                0
+                            @endif
+                        @else
+                          x
+                        @endif
+
                     </td>
                 </tr>
             @endforeach

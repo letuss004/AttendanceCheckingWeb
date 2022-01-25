@@ -85,9 +85,6 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="col-md-8">
-
-            </div>
         </div>
     </div>
 

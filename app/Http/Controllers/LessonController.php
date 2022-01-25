@@ -54,6 +54,12 @@ class LessonController extends Controller
             $tmp = true;
             $lesson->setAttribute('count', $count);
         }
+        if (count($lessons) == 0) {
+            foreach ($students as $student) {
+                $user = User::findOrFail($student->id);
+                array_push($users, $user);
+            }
+        }
         if (user::findorfail(auth()->user()->getauthidentifier())->user_type_id == 3) {
             if (count($lessons) == 0) {
                 foreach ($students as $student) {

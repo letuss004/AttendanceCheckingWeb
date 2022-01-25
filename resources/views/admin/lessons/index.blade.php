@@ -1,9 +1,9 @@
 @extends('layouts.sidebar')
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mx-5">
             <h2 class="text-center mb-md-5">{{$course->courseList->name}} Classes</h2>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between ">
                 <div class="my-2">
                     <button type="button" class="btn btn-primary"
                             data-bs-toggle="modal" data-bs-target="#new_class_modal">
@@ -74,7 +74,7 @@
         <hr class="mt-lg-5">
 
         {{--    new table--}}
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mx-5">
             <h2 class="text-center mb-md-5">Student list</h2>
             <div class="d-flex justify-content-between">
                 <div class="my-2">
@@ -306,18 +306,19 @@
             $(function () {
                 $('#input_file').change(function (e) {
                     file = e.target.files[0];
-                    console.log(file);
                 })
             })
             jQuery('#add_student_button').click(function (e) {
                 e.preventDefault();
                 let data = new FormData();
                 let input = $('#student_input').val();
+
                 data.append('option', $('#add_student_select').val())
                 data.append('course_id', '{{$course->id}}')
                 data.append('student_id', input)
                 data.append('json', input)
                 data.append('xlsx', file)
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -333,12 +334,13 @@
                     cache: false,
                     timeout: 600000,
                     success: function (data) {
-                        console.log('sucess')
+                        console.log(data);
+                        location.reload();
                     },
                     error: function (e) {
-                        console.log('fail')
+                        console.log(e)
                     }
-                })
+                });
             });
         });
     </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CourseStudentsImport;
 use App\Imports\StudentImport;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
@@ -41,13 +42,19 @@ class CourseController extends Controller
             'course_id' => ['required'],
         ]);
         $course = Course::findOrFail($data['course_id']);
+        $student_pivot = $course->students;
         if ($data['option'] == 1) {
             $data = request()->validate([
                 'xlsx' => ['required', 'file'],
             ]);
-            $file = request()->file('xlsx')->store('storage/upload/');
-            $store = Excel::import(new StudentImport(), $file);
-            return \response($store, 201);
+            $file = $data['xlsx']->store('storage/excel/');
+            $data = Excel::toCollection(new CourseStudentsImport($course), $file);
+            foreach ($data[0] as $row) {
+                if (!$student_pivot->contains($row['id'])) {
+                    $course->students()->attach($row['id']);
+                }
+            }
+            return \response(["Created"], 201);
         } else if ($data['option'] == 2) {
             $data = request()->validate([
                 'json' => ['required'],
