@@ -18,6 +18,10 @@ class CreateCourseStudentPivotTable extends Migration
             $table->unsignedBigInteger('course_id');
             $table->string('student_id');
             $table->timestamps();
+
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('student_id')->references('id')->on('students');
+
         });
         $values = [
             [

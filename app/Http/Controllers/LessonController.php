@@ -62,12 +62,6 @@ class LessonController extends Controller
             }
         }
         if (user::findorfail(auth()->user()->getauthidentifier())->user_type_id == 3) {
-            if (count($lessons) == 0) {
-                foreach ($students as $student) {
-                    $user = User::findOrFail($student->id);
-                    $users[] = $user;
-                }
-            }
             return \view('admin/lessons/index', compact('course', "lessons", 'students', 'users'));
         }
         return view('lessons/index', compact('course', "lessons", 'students', 'users'));

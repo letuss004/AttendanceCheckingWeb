@@ -10,6 +10,9 @@ use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Request;
 
@@ -23,13 +26,13 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        $student = Student::findOrFail('ba9067');
-        $courses = Course::findOrFail(1);
-        dd($student->courses, $courses->students, $courses->students_count, $courses->lessons);
+        $users = User::all();
+        $count = 1;
+        return view('/admin/students/index', compact('users', 'count'));
     }
 
     /**

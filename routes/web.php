@@ -58,11 +58,11 @@ Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->n
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
 
 
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
-Route::get('/student/test', [StudentController::class, 'index'])->name('test');
 
 
-Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
 
 
