@@ -39,7 +39,6 @@ class CourseController extends Controller
     {
         $data = request()->validate([
             'option' => ['required'],
-            'course_id' => ['required'],
         ]);
         $course = Course::findOrFail($data['course_id']);
         $student_pivot = $course->students;

@@ -35,7 +35,17 @@ class HomeController extends Controller
         if ($user_type === 1) {
             return view('home/student');
         } elseif ($user_type === 2) {
-            return view('home/teacher');
+            $courses = Course::all()->where('teacher_id', '=', $user->id);
+            $active = $courses->where('active', '=', 1);
+            $finished = $courses->where('active', '=', 0);
+            $coursesList = CourseList::all();
+            return view('home/teacher',
+                compact('courses',
+                    'active',
+                    'finished',
+                    'coursesList'
+                )
+            );
         } elseif ($user_type === 3) {
             $courses = Course::all();
             $active = $courses->where('active', '=', 1);

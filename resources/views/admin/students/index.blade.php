@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 @section('content')
     <div class="row justify-content-center mx-5">
-        <h2 class="text-center ">Active Courses</h2>
+        <h2 class="text-center ">All Students</h2>
         <div class="d-flex justify-content-between">
             <div class="my-2">
                 <button type="button" class="btn btn-primary"
@@ -29,16 +29,14 @@
             <tr>
             </tr>
             @foreach($users as $user)
-                @if($user->user_type_id == 1)
-                    <tr>
-                        <td>{{$count++}}</td>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{$user->username}}</td>
-                        <td>{{$user->department->department}}</td>
-                    </tr>
-                @endif
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$user->id}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->username}}</td>
+                    <td>{{$user->department->department}}</td>
+                </tr>
             @endforeach
             </tbody>
         </table>
@@ -98,7 +96,7 @@
                 }
             )
             // add student input ==================================================================
-            var file;
+            let file;
             $(function () {
                 $('#input_file').change(function (e) {
                     file = e.target.files[0];
@@ -122,7 +120,7 @@
                 $.ajax({
                     type: "POST",
                     enctype: 'multipart/form-data',
-                    url: "{{ route('user.store') }}",
+                    url: "{{ route('student.create') }}",
                     data: data,
                     processData: false,
                     contentType: false,
@@ -130,7 +128,7 @@
                     timeout: 600000,
                     success: function (data) {
                         console.log(data);
-                        location.reload();
+                        // location.reload();
                     },
                     error: function (e) {
                         console.log(e)

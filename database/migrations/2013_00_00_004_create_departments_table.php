@@ -24,6 +24,14 @@ class CreateDepartmentsTable extends Migration
             ['department' => 'ICT'],
             ['department' => 'FST'],
             ['department' => 'CS'],
+            ['department' => 'PMAB'],
+            ['department' => 'WEO'],
+            ['department' => 'MST'],
+            ['department' => 'MATH'],
+            ['department' => 'AMSN'],
+            ['department' => 'CHEM'],
+            ['department' => 'EN'],
+            ['department' => 'EPE'],
         ];
         DB::table('departments')->insert($values);
     }

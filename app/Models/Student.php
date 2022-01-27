@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 
 /**
@@ -45,6 +46,33 @@ class Student extends Model
     protected $guarded = [];
     public $timestamps = true;
     public $incrementing = false;
+
+    /**
+     * Save a new model with relationship then return the instance.
+     *
+     * @param array $attributes
+     * @return Builder|Model
+     */
+    public static function createWithRel(array $attributes = []): Model|Builder
+    {
+        $user = User::create([
+            'id' => $attributes['id'],
+            'email' => $attributes['email'],
+            'username' => $attributes['id'],
+            'user_type_id' => 1,
+            'name' => $attributes['name'],
+            'password' => \Hash::make($attributes['password']),
+            'department_id' => $attributes['department_id'],
+        ]);
+        Student::create([
+            'id' => $user->id
+        ]);
+        Temporary::create([
+            'user_id' => $user->id,
+            'user_password' => $attributes['password'],
+        ]);
+        return $user;
+    }
 
     public function attendances(): HasMany
     {

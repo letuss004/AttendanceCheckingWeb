@@ -112,7 +112,7 @@ class LessonController extends Controller
             $user->setAttribute('status', $status);
             $users[] = $user;
         }
-        if (User::findOrFail(auth()->user()->getAuthIdentifier())->department_id == 1) {
+        if (User::findOrFail(auth()->user()->getAuthIdentifier())->user_type_id == 1) {
             $st_all = Student::all();
             return view('admin/lessons/show',
                 compact('lesson',
