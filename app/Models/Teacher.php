@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,6 +42,33 @@ class Teacher extends Model
     protected $guarded = [];
     public $timestamps = true;
     public $incrementing = false;
+
+    /**
+     * Save a new model with relationship then return the instance.
+     *
+     * @param array $attributes
+     * @return Builder|Model
+     */
+    public static function createWithRel(array $attributes = []): Model|Builder
+    {
+        $user = (new User)->firstOrCreate([
+            'id' => $attributes['id'],
+            'email' => $attributes['email'],
+            'username' => $attributes['id'],
+            'user_type_id' => 2,
+            'name' => $attributes['name'],
+            'password' => Hash::make($attributes['password']),
+            'department_id' => $attributes['department_id'],
+        ]);
+        Teacher::firstOrCreate([
+            'id' => $user->id
+        ]);
+        Temporary::firstOrCreate([
+            'user_id' => $user->id,
+            'user_password' => $attributes['password'],
+        ]);
+        return $user;
+    }
 
     public function lessons(): HasMany
     {

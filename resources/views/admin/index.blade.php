@@ -1,12 +1,12 @@
 @extends('layouts.sidebar')
 @section('content')
     <div class="row justify-content-center mx-5">
-        <h2 class="text-center ">All Students</h2>
+        <h2 class="text-center ">All Admin</h2>
         <div class="d-flex justify-content-between">
             <div class="my-2">
                 <button type="button" class="btn btn-primary"
                         data-bs-toggle="modal" data-bs-target="#add_student_modal">
-                    Add student
+                    Add
                 </button>
             </div>
             <div class="my-2 search">
@@ -50,7 +50,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add student</h5>
+                    <h5 class="modal-title">Add admin</h5>
                     <select id="add_student_select" class="form-select w-25" aria-label=".form-select example">
                         <option value="1" selected>Excel</option>
                         <option value="2">Json</option>
@@ -120,7 +120,7 @@
                 $.ajax({
                     type: "POST",
                     enctype: 'multipart/form-data',
-                    url: "{{ route('student.create') }}",
+                    url: "{{ route('admin.create') }}",
                     data: data,
                     processData: false,
                     contentType: false,

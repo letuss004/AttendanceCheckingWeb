@@ -55,7 +55,7 @@ class Student extends Model
      */
     public static function createWithRel(array $attributes = []): Model|Builder
     {
-        $user = User::firstOrCreate([
+        $user = (new User)->firstOrCreate([
             'id' => $attributes['id'],
             'email' => $attributes['email'],
             'username' => $attributes['id'],

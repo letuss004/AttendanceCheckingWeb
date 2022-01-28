@@ -12,6 +12,7 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
@@ -53,6 +54,7 @@ class StudentController extends Controller
                 'xlsx' => ['required', 'file'],
             ]);
             $file = $data['xlsx']->store('public/uploads/excels');
+//            using student import
             $data = Excel::toCollection(new StudentsImport, $file);
             foreach ($data[0] as $row) {
                 $pw = random_int(10000000, 11111111) * random_int(1, 9);
@@ -91,19 +93,10 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreStudentRequest $request
-     * @param int $lesson_id
-     * @return string
      */
-    public function store(StoreStudentRequest $request, int $lesson_id): string
+    public function store(StoreStudentRequest $request, int $lesson_id): Response|Application|ResponseFactory
     {
-        $lesson = Lesson::findOrFail($lesson_id);
-        Attendance::create([
-            'attendance_status_id' => 1,
-            'lesson_id' => $lesson_id,
-            'student_id' => 'BA9067',
-        ]);
-        return "success";
+        return \response();
     }
 
     /**

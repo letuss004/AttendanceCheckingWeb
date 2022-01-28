@@ -46,13 +46,13 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-dark">
-                    Lecturers
+                <a href="{{ route('teacher.index') }}" class="nav-link link-dark">
+                    Lecturer
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-dark">
-                    QR
+                <a href="{{ route('admin.index') }}" class="nav-link link-dark">
+                    Admin
                 </a>
             </li>
         </ul>

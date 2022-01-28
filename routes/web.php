@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,8 @@ Route::post('/qr/edit/', [QrController::class, 'edit'])->name('qr.edit');
 Route::post('/qr/destroy/', [QrController::class, 'destroy'])->name('qr.destroy');
 
 
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::post('/admin/create', [AdminController::class, 'create'])->name('admin.create');
 Route::post('/admin/lessons/{course_id}', [LessonController::class, 'index'])->name('admin.lessons.index');
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
 Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
@@ -63,7 +66,10 @@ Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->n
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::post('/student/create', [StudentController::class, 'create'])->name('student.create');
-Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.store');
+
+
+Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
+Route::post('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
 
 
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
