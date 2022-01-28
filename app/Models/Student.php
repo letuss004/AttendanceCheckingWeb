@@ -55,7 +55,7 @@ class Student extends Model
      */
     public static function createWithRel(array $attributes = []): Model|Builder
     {
-        $user = User::create([
+        $user = User::firstOrCreate([
             'id' => $attributes['id'],
             'email' => $attributes['email'],
             'username' => $attributes['id'],
@@ -64,10 +64,10 @@ class Student extends Model
             'password' => \Hash::make($attributes['password']),
             'department_id' => $attributes['department_id'],
         ]);
-        Student::create([
+        Student::firstOrCreate([
             'id' => $user->id
         ]);
-        Temporary::create([
+        Temporary::firstOrCreate([
             'user_id' => $user->id,
             'user_password' => $attributes['password'],
         ]);

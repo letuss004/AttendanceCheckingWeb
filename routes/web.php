@@ -26,7 +26,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -42,6 +44,7 @@ Route::get('/lesson/show/{lesson_id}', [LessonController::class, 'show'])->name(
 Route::post('/lesson/store', [LessonController::class, 'store'])->name('lesson.store');
 Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesson.update');
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
 
 Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
 Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 'show'])->name('course.show');
@@ -59,7 +62,8 @@ Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->n
 
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.create');
+Route::post('/student/create', [StudentController::class, 'create'])->name('student.create');
+Route::post('/student/attendance/{lesson_id}', [StudentController::class, 'store'])->name('student.store');
 
 
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');

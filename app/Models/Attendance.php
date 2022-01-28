@@ -37,6 +37,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \App\Models\Qr $qr
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
  * @property-read int|null $images_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read int|null $tokens_count
  */
 class Attendance extends Model
 {

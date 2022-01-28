@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\CourseStudentsImport;
 use App\Imports\StudentsImport;
 use App\Models\Attendance;
-use App\Models\Course;
 use App\Models\Department;
-use App\Models\Enrollment;
 use App\Models\Lesson;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
-use App\Models\Temporary;
 use App\Models\User;
 use Exception;
-use Hash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Maatwebsite\Excel\Facades\Excel;
-use Request;
 
 class StudentController extends Controller
 {
@@ -54,7 +47,6 @@ class StudentController extends Controller
         $data = request()->validate([
             'option' => ['required'],
         ]);
-        $users = User::all();
         $dep_list = Department::all();
         if ($data['option'] == 1) {
             $data = request()->validate([
@@ -63,8 +55,8 @@ class StudentController extends Controller
             $file = $data['xlsx']->store('public/uploads/excels');
             $data = Excel::toCollection(new StudentsImport, $file);
             foreach ($data[0] as $row) {
-                $pw = random_int(10000000, 11111111) * 9;
-                if ($row['major'] != null and !$users->contains('id', '=', $row['id'])) {
+                $pw = random_int(10000000, 11111111) * random_int(1, 9);
+                if ($row['major'] != null) {
                     $dep = $this->getDepartment($row['major'], $dep_list);
                     Student::createWithRel([
                         'id' => $row['id'],
@@ -79,11 +71,9 @@ class StudentController extends Controller
             }
             return \response(["Created"], 201);
         } else if ($data['option'] == 2) {
-            $data = request()->validate([
-                'json' => ['required'],
-            ]);
+            return \response(['not support yet']);
         } else if ($data['option'] == 3) {
-            return \response([]);
+            return \response(['not support yet']);
         }
         return \response(['fail'], 400);
     }
