@@ -38,6 +38,7 @@ Route::post('/course/create', [CourseController::class, 'store'])->name('course.
 Route::post('/course/edit/', [CourseController::class, 'edit'])->name('course.update');
 Route::post('/course/destroy/', [CourseController::class, 'destroy'])->name('course.destroy');
 Route::post('/course/add/student', [CourseController::class, 'create'])->name('course.add.student');
+Route::post('/course/remove/student', [CourseController::class, 'remove'])->name('course.remove.student');
 
 
 Route::get('/lessons/{course_id}', [LessonController::class, 'index'])->name('lessons');
@@ -59,9 +60,6 @@ Route::post('/qr/destroy/', [QrController::class, 'destroy'])->name('qr.destroy'
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::post('/admin/create', [AdminController::class, 'create'])->name('admin.create');
-Route::post('/admin/lessons/{course_id}', [LessonController::class, 'index'])->name('admin.lessons.index');
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
-Route::post('/admin/register/{course_id}', [AdminController::class, 'store'])->name('');
 
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');

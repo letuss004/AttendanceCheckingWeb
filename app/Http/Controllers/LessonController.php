@@ -44,7 +44,7 @@ class LessonController extends Controller
         foreach ($lessons as $lesson) {
             $count = 0;
             foreach ($students as $student) {
-                $user = User::findOrFail($student->id);
+                $user = (new User)->findOrFail($student->id);
                 if ($this->attendanceCondition($user, $lesson) == 1) {
                     $count++;
                 }
@@ -57,11 +57,11 @@ class LessonController extends Controller
         }
         if (count($lessons) == 0) {
             foreach ($students as $student) {
-                $user = User::findOrFail($student->id);
+                $user = (new User)->findOrFail($student->id);
                 $users[] = $user;
             }
         }
-        if (user::findorfail(auth()->user()->getauthidentifier())->user_type_id == 3) {
+        if ((new User)->findorfail(auth()->user()->getauthidentifier())->user_type_id == 3) {
             return \view('admin/lessons/index', compact('course', "lessons", 'students', 'users'));
         }
         return view('lessons/index', compact('course', "lessons", 'students', 'users'));
@@ -112,7 +112,7 @@ class LessonController extends Controller
             $user->setAttribute('status', $status);
             $users[] = $user;
         }
-        if (User::findOrFail(auth()->user()->getAuthIdentifier())->user_type_id == 1) {
+        if (User::findOrFail(auth()->user()->getAuthIdentifier())->user_type_id == 3) {
             $st_all = Student::all();
             return view('admin/lessons/show',
                 compact('lesson',

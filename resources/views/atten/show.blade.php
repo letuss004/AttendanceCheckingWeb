@@ -2,14 +2,27 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            <h2 class="my-4"></h2>
+
+            @if(count($images->toArray()) == 0)
+                There is no images
+            @endif
+
             @foreach($images as $image)
-                <div class="card" style="width: 18rem;">
-                    <img src="{{$image->path}}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </p>
+                <div class="row align-content-center">
+                    <div class="card mb-3 row row-cols-1 m-auto">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src=" {{ asset('storage/'.$image->path) }}" class="img-thumbnail" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach

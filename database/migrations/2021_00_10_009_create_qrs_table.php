@@ -26,14 +26,17 @@ class CreateQrsTable extends Migration
             [
                 'qr_status_id' => 1,
                 'lesson_id' => 1,
+                'name' => 'first qr'
             ],
             [
                 'qr_status_id' => 1,
                 'lesson_id' => 1,
+                'name' => 'second qr'
             ],
             [
                 'qr_status_id' => 1,
                 'lesson_id' => 1,
+                'name' => '3rd qr'
             ],
         ];
         DB::table('qrs')->insert($values);

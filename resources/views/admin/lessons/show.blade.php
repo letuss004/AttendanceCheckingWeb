@@ -90,7 +90,7 @@
                     <select id="qr_list" class="form-select d-none" aria-label=".form-select example">
                         <option selected>Choose QR here</option>
                         @foreach($lesson->qrs as $qr)
-                            <option value="{{$qr->id}}">{{$qr->id}}</option>
+                            <option value="{{$qr->id}}">{{$qr->name}}</option>
                         @endforeach
                     </select>
                 </div>
