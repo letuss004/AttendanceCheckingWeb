@@ -137,12 +137,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel2">Close QR</h5>
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">Delete student</h5>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure?</p>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button id="delete_confirm" class="btn btn-danger" data-bs-target="#staticBackdrop"
                             data-bs-dismiss="modal">Delete
                     </button>

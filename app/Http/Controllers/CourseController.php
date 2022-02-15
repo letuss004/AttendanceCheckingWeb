@@ -61,7 +61,7 @@ class CourseController extends Controller
             $data = request()->validate([
                 'student_id' => ['required'],
             ]);
-            $student = Student::find($data['student_id']);
+            $student = Student::findOrFail($data['student_id']);
             $course->students()->attach($student);
             return \response([]);
         }
@@ -203,10 +203,15 @@ class CourseController extends Controller
             'student_id' => ['required'],
         ]);
         $course = Course::find($data['course_id']);
-        $st = $course->students->where('id', '=', $data['student_id']);
+        $students = $course->students;
+
+        foreach ($students as $student) {
+            if ($student->id == $data['student_id']) {
+                $course->students()->detach($student->id);
+            }
+        }
         return response([
-            $st,
-            $course->students()->detach($st[0]->id)
+            "Delete success"
         ]);
     }
 

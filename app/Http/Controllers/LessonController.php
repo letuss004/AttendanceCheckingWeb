@@ -107,12 +107,12 @@ class LessonController extends Controller
         $students = $lesson->course->students;
         $users = [];
         foreach ($students as $student) {
-            $user = User::findOrFail($student->id);
+            $user = (new User)->findOrFail($student->id);
             $status = $this->attendanceCondition($user, $lesson);
             $user->setAttribute('status', $status);
             $users[] = $user;
         }
-        if (User::findOrFail(auth()->user()->getAuthIdentifier())->user_type_id == 3) {
+        if ((new User)->findOrFail(auth()->user()->getAuthIdentifier())->user_type_id == 3) {
             $st_all = Student::all();
             return view('admin/lessons/show',
                 compact('lesson',

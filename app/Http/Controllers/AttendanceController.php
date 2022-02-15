@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAttendanceRequest;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Qr;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -95,27 +96,22 @@ class AttendanceController extends Controller
      * @param StoreAttendanceRequest $request
      * @return Application|ResponseFactory|Response
      */
-    public function store(StoreAttendanceRequest $request)
+    public function store(StoreAttendanceRequest $request): Response|Application|ResponseFactory
     {
         $data = $request->validate([
             'lesson_id' => ['required',],
             'qr_id' => ['required',],
             'student_id' => ['required',],
             'b1' => ['required', 'image'],
-//            'b1s' => ['required', 'string'],
             'b2' => ['required', 'image'],
-//            'b2s' => ['required', 'string'],
             'b3' => ['required', 'image'],
-//            'b3s' => ['required', 'string'],
             'f1' => ['required', 'image'],
-//            'f1s' => ['required', 'string'],
             'f2' => ['required', 'image'],
-//            'f2s' => ['required', 'string'],
         ]);
 
         $qr = Qr::findOrFail($data['qr_id']);
         $status = $qr->qr_status_id;
-        $user = User::findOrFail(auth()->user()->getAuthIdentifier());
+        $user = (new User)->findOrFail(auth()->user()->getAuthIdentifier());
         if ($qr->attendances->contains('student_id', '=', $user->id)) {
             return response(['message' => 'Student already attendance'], 403);
         }
@@ -128,7 +124,6 @@ class AttendanceController extends Controller
 
 
         if ($status == 1) {
-
             $attendance = Attendance::create([
                 'attendance_status_id' => 1,
                 'qr_id' => $data['qr_id'],
@@ -169,7 +164,7 @@ class AttendanceController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function show(int $attendance_id)
+    public function show(int $attendance_id): View|Factory|Application
     {
         $attendance = Attendance::find($attendance_id);
         $images = $attendance->images;
@@ -207,7 +202,7 @@ class AttendanceController extends Controller
      */
     public function destroy(Attendance $attendance)
     {
-        //
+        return \response([]);
     }
 
     /*
@@ -221,13 +216,25 @@ class AttendanceController extends Controller
         return \response([]);
     }
 
-    private function countAttendanceStatus(int $b1, int $b2, int $b3, int $f1, int $f2)
+    public function fetch()
     {
-//        $a = ($b1 + $b2 + $b3 + $f1 + $f2);
-//        $b = $a / 5;
-//        if ($b >= $a * 0.6 ) {
-//
-//        }
-        return 3;
+        $data = \request()->validate([
+            'course_id' => ['required'],
+            'student_id' => ['required'],
+        ]);
+        $course = Course::findOrFail($data['course_id']);
+        $student = (new User)->findOrFail($data['student_id']);
+        $lessons = $course->lessons;
+        $status = [];
+        foreach ($lessons as $lesson) {
+            $cond = $this->attendanceCondition($student, $lesson);
+            $status[] = $cond;
+        }
+        return \response([
+            'lessons' => $lessons,
+            'status' => $status,
+            'message' => 'success'
+        ]);
     }
+
 }
