@@ -48,8 +48,10 @@ Route::post('/lesson/update/', [LessonController::class, 'update'])->name('lesso
 Route::post('/lesson/destroy/', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 
+Route::post('/atten/change', [AttendanceController::class, 'update'])->name('atten.update');
 Route::get('/attendances/course/{course_id}', [AttendanceController::class, 'index'])->name('course.attendance');
-Route::get('/attendances/show/{attendance_id}', [AttendanceController::class, 'show'])->name('course.show');
+Route::get('/attendances/show/{attendance_id}/{qr_id}/{st_id}', [AttendanceController::class, 'show']);
+Route::get('/not/atten/show/{qr_id}/{student_id}', [AttendanceController::class, 'showNotAtten'])->name('course.not.atten.show');
 
 
 Route::post('/qr/generate', [QrController::class, 'create'])->name('qr.create');

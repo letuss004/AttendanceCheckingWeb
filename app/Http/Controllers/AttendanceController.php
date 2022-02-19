@@ -162,13 +162,32 @@ class AttendanceController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param int $attendance_id
      * @return Application|Factory|View
      */
-    public function show(int $attendance_id): View|Factory|Application
+    public function show(int    $attendance_id,
+                         int    $qr_id,
+                         string $student_id): View|Factory|Application
     {
+        $qr = Qr::find($qr_id);
+        $user = (new User)->findOrFail($student_id);
         $attendance = Attendance::find($attendance_id);
         $images = $attendance->images;
-        return \view('atten/show', compact('attendance', 'images'));
+        return \view('atten/show', compact('attendance', 'images', 'qr', 'user'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $qr_id
+     * @return Application|Factory|View
+     */
+    public function showNotAtten(int    $qr_id,
+                                 string $student_id): View|Factory|Application
+    {
+        $qr = Qr::find($qr_id);
+        $user = (new User)->findOrFail($student_id);
+        return \view('atten/notshow', compact('qr', 'user'));
     }
 
     /**
@@ -191,7 +210,32 @@ class AttendanceController extends Controller
      */
     public function update(UpdateAttendanceRequest $request, Attendance $attendance)
     {
-        //
+        $data = $request->validate([
+            'user_id' => 'required',
+            'qr_id' => 'required',
+            'type' => ['int', 'required']
+        ]);
+        $qr = Qr::findOrFail($data['qr_id']);
+        $ls_id = $qr->lesson->id;
+        // type = 1 => not atten to atten
+        if ($data['type'] == 1) {
+            $qr->attendances()->create([
+                'attendance_status_id' => 1,
+                'qr_id' => $qr->id,
+                'lesson_id' => $qr->lesson->id,
+                'student_id' => $data['user_id']
+            ]);
+            return \response(['lesson_id' => $ls_id]);
+        } else {
+            $atten = $qr->attendances;
+            foreach ($atten as $item) {
+                if ($item->student_id == $data['user_id']) {
+                    $item->images()->delete();
+                    $item->delete();
+                }
+            }
+            return \response(['lesson_id' => $ls_id]);
+        }
     }
 
     /**
