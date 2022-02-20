@@ -12,7 +12,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\User;
+use App\Models\Usern;
 
 class CourseController extends Controller
 {
